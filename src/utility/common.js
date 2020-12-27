@@ -1,8 +1,11 @@
-import moment from "moment";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { useState, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
 
-const formatDate = (date) => date && moment(date).format("DD-MM-YYYY");
+dayjs.extend(relativeTime);
+
+const formatDate = (date) => date && dayjs(date).format("DD-MM-YYYY");
 
 const showToast = (message) =>
   message &&
@@ -13,12 +16,12 @@ const showToast = (message) =>
     },
   });
 
-const formatTime = (time) => time && moment(time).format("hh:mm A");
+const formatTime = (time) => time && dayjs(time).format("hh:mm A");
 
 const formatDateAndTime = (date) =>
-  date && moment(date).format("DD-MM-YYYY hh:mm A");
+  date && dayjs(date).format("DD-MM-YYYY hh:mm A");
 
-const fromNow = (date) => moment(date).fromNow();
+const fromNow = (date) => dayjs(date).fromNow();
 
 const capitalize = (s) => s && s[0].toUpperCase() + s.slice(1);
 

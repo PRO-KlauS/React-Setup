@@ -11,8 +11,8 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.3",
+    "dayjs": "^1.9.8",
     "jwt-decode": "^3.0.0",
-    "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "pretty-checkbox": "^3.0.3",
     "pretty-checkbox-react": "^3.0.3",
@@ -29,16 +29,16 @@
     "react-scripts": "3.4.4",
     "react-slick": "^0.27.13",
     "react-tooltip": "^4.2.11",
-    "recharts": "^1.8.5",
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",
+    "source-map-explorer": "^2.5.1",
     "yup": "^0.29.3"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/**/*.js --fix-dry-run",
@@ -46,7 +46,8 @@
     "staging": "REACT_APP_ENV=staging npm start",
     "production": "REACT_APP_ENV=production npm start",
     "build:staging": "REACT_APP_ENV=staging npm run build",
-    "build:production": "REACT_APP_ENV=production npm run build"
+    "build:production": "REACT_APP_ENV=production npm run build",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": "react-app"
