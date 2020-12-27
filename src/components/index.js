@@ -19,7 +19,6 @@ import DataCard from "./common/dataCard";
 import ConfirmationModal from "./common/confirmationModal";
 import TagInput from "./common/tagInput";
 import ToolTip from "./common/toolTip";
-import PieChart from "./common/pieChart";
 import Dropdown from "./common/dropdown";
 export {
   Footer,
@@ -43,6 +42,5 @@ export {
   ConfirmationModal,
   TagInput,
   ToolTip,
-  PieChart,
   Dropdown,
 };
