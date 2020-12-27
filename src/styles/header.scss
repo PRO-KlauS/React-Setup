@@ -1,0 +1,197 @@
+@import "./common/variables.scss";
+.navbar.fixed-top{
+  min-height:60px;
+  background-color:$white;  
+  padding-left:0;
+  padding-right:0;
+  @include nav-animation;
+  box-shadow:0 1px 18px rgba($color:$black,$alpha:.053);
+  -webkit-box-shadow:0 1px 18px rgba($color:$black,$alpha:.053);
+  .container{
+    .page-title{
+      h1{
+        @include medium-font;
+        color:$blue;
+        margin:0;
+        font-weight:600;
+        text-transform:capitalize;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      }
+    }
+    .navigation-items{
+      display:flex
+    }
+    .dropdown-toggle.btn{
+      padding:.375rem .25rem!important;
+      i{
+        color:$dark-grey-2;
+        font-size:20px;
+        position:relative;
+        top:2px;
+        transition:color .15s ease-in-out;
+        -webkit-transition:color .15s ease-in-out;
+        -moz-transition:color .15s ease-in-out;
+        -ms-transition:color .15s ease-in-out;
+        -o-transition:color .15s ease-in-out
+      }
+      &:hover{
+        color:$blue;
+        i{
+          color:$blue
+        }
+        &:after{
+          border-top:.3em solid $blue!important
+        }
+      }
+    }
+    .show.dropdown{
+      .dropdown-toggle.btn{
+        color:$blue;
+        i{
+          color:$blue
+        } 
+      }
+    }
+    .dropdown-menu{
+      margin-top:8px!important
+    }
+  }
+}
+@media(min-width:992px){
+  .navbar.fixed-top{
+    .collapse-menu-btn{
+      width:32px;
+      height:32px;
+      position:absolute;
+      left:-16px;
+      background-color:$white;
+      line-height:32px;
+      text-align:center;
+      color:$blue;
+      border-radius:50%;
+      cursor:pointer;
+      box-shadow:1px 0 18px rgba($color:$black,$alpha:.25)
+    }
+    .collapse-sidebar-btn{
+      display:none
+    }
+    .container{
+      padding-left:30px;
+      padding-right:30px
+    }
+  }
+  .pro-sidebar ~ .navbar.fixed-top{
+    @include open-sidebar
+  }
+  .pro-sidebar.collapsed ~ .navbar.fixed-top{
+    @include collapsed-sidebar
+  }
+}
+@media(max-width:991.98px){
+  .navbar.fixed-top{
+    z-index:1000;
+    .collapse-menu-btn{
+      display:none
+    }
+    .collapse-sidebar-btn{
+      display:block;
+      line-height:24px;
+      padding:10px;
+      margin-left:5px;
+      cursor:pointer;
+      color:$dark-grey-2;
+      &:hover{
+        color:$blue
+      }
+    }
+  } 
+}
+@media(min-width:768px){
+  .navbar.fixed-top{
+    .dropdown-toggle.btn{
+      .user-name{
+        max-width:99px;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+        overflow:hidden;
+        display:inline-block;
+        position:relative;
+        top:5px
+      }
+      i{
+        margin-right:10px
+      }
+    }
+    .container{
+      .page-title{
+        max-width:calc(100% - 151px);
+        h1{
+          font-size:18px
+        }
+      }
+    }
+  }
+}
+@media(min-width:576px) and (max-width:767.98px){
+  .navbar.fixed-top{
+    .container{
+      padding-left:15px;
+      padding-right:15px
+    }
+  }
+}
+@media(max-width:767.98px){
+  .navbar.fixed-top{
+    .dropdown-toggle.btn{
+      .user-name{
+        display:none
+      }
+      i{
+        margin-right:5px
+      }
+    }
+    .dropdown-menu{
+      left:auto;
+      right:-40px
+    }
+  }
+}
+@media(min-width:300px) and (max-width:767.98px){
+  .navbar.fixed-top{
+    .container{
+      .page-title{
+        max-width:calc(100% - 90px);
+        h1{
+          font-size:16px
+        }
+      }
+    }
+  }
+}
+@media(min-width:300px) and (max-width:575.98px){
+  .navbar.fixed-top{
+    .container{
+      padding-left:18px;
+      padding-right:18px
+    }
+  }
+}
+@media(max-width:299.98px){
+  .navbar.fixed-top{
+    .container{
+      padding-left:10px;
+      padding-right:10px;
+      .page-title{
+        max-width:calc(100% - 80px);
+        h1{
+          font-size:14px
+        }
+      }
+    }
+    .collapse-sidebar-btn{
+      padding:10px 5px
+    }
+  }
+}

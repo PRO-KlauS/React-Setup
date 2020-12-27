@@ -1,0 +1,83 @@
+$white:#fff;
+$black:#000;
+$blue:#283891;
+$dark-blue:hsl(231,64%,31%);
+$sky-blue:#2196f3;
+$dark-cyan-1:#1cbdb9;
+$dark-cyan-2:#13afab;
+$dark-cyan-3:#0f827f;
+$red-1:#ef5350;
+$red-2:#d32f2f;
+$red-3:#f44336;
+$yellow:#ffca28;
+$pink:#ed037d;
+$light-orange:#f9a57a;
+$dark-green:#66bb6a;
+$dark-green-2:#43a047;
+$light-pink:#fbdee1;
+$light-grey:#f2f4f8;
+$light-grey-2:#e2e4e8;
+$light-grey-3:#d2d4d8;
+$light-grey-4:#c2c4c8;
+$dark-grey-1:#424448;
+$dark-grey-2:#929498;
+$dark-grey-3:#828488;
+$dark-grey-4:#222;
+
+$fonts:'Poppins',sans-serif;
+
+//Fonts
+@mixin light-font{
+  font-family:$fonts;  
+  font-weight:300
+}
+@mixin regular-font{
+  font-family:$fonts;
+  font-weight:400
+}
+@mixin medium-font{
+  font-family:$fonts;
+  font-weight:500
+}
+@mixin semibold-font{
+  font-family:$fonts;
+  font-weight:600
+}
+@mixin sidebar-width{
+  width:250px;
+  min-width:250px
+}
+@mixin open-sidebar{
+  left:250px
+}
+@mixin collapsed-sidebar{
+  left:80px
+}
+@mixin open-sidebar-pad{
+  padding-left:250px
+}
+@mixin collapsed-sidebar-pad{
+  padding-left:80px
+}
+
+@mixin nav-animation{
+  transition:all 0.3s;
+  -webkit-transition:all 0.3s;
+  -moz-transition:all 0.3s;
+  -ms-transition:all 0.3s;
+  -o-transition:all 0.3s
+}
+@mixin table-row-animation{
+  transition:box-shadow 0.15s;
+  -webkit-transition:-webkit-box-shadow 0.15s;
+  -moz-transition:-moz-box-shadow 0.15s;
+  -ms-transition:-ms-box-shadow 0.15s;
+  -o-transition:-o-box-shadow 0.15s
+}
+@mixin table-row-shadow{
+  box-shadow:3px 3px 12px rgba(0,0,0,.09);
+  -webkit-box-shadow:3px 3px 12px rgba(0,0,0,.09);
+  -moz-box-shadow:3px 3px 12px rgba(0,0,0,.09);
+  -ms-box-shadow:3px 3px 12px rgba(0,0,0,.09);
+  -o-box-shadow:3px 3px 12px rgba(0,0,0,.09)
+}

@@ -1,0 +1,30 @@
+@import "./common/variables.scss";
+.edit-profile-form{
+  .change-password{
+    a{
+      color:$dark-grey-2;
+      font-size:14px;
+      text-decoration:none;
+      &:hover{
+        color:$blue
+      }
+    }
+  }
+  @media(min-width:576px){
+    .btn{
+      min-width:180px
+    }
+    .change-password{
+      text-align:right
+    }
+  }
+  @media(max-width:575.98px){
+    .btn{
+      min-width:100%
+    }
+    .change-password{
+      margin-top:25px;
+      text-align:center
+    }
+  }
+}

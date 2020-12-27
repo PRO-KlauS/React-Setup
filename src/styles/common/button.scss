@@ -1,0 +1,70 @@
+@import "./variables.scss";
+.btn{
+  height:40px;
+  @include regular-font;
+  font-size:14px
+}
+.btn-primary{
+  background-color:$blue;
+  border-color:$blue;
+  &:hover,
+  &:focus,
+  &:not(:disabled):not(.disabled):active{
+    background-color:$dark-blue;
+    border-color:$dark-blue
+  }
+  &:focus,
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled):active:focus{
+    box-shadow:0 0 0 0.2rem rgba($color:$dark-blue,$alpha:.25)
+  }
+  &.disabled,&:disabled{
+    background-color:rgba($color:$dark-blue,$alpha:.75);
+    border-color:rgba($color:$dark-blue,$alpha:.25)
+  }
+}
+.btn-success{
+  background-color:$dark-cyan-1;
+  border-color:$dark-cyan-1;
+  &:hover,
+  &:focus,
+  &:not(:disabled):not(.disabled):active{
+    background-color:$dark-cyan-2;
+    border-color:$dark-cyan-2
+  }
+  &:focus,
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled):active:focus{
+    box-shadow:0 0 0 0.2rem rgba($color:$dark-cyan-2,$alpha:.25)
+  }
+  &.disabled,&:disabled{
+    background-color:rgba($color:$dark-cyan-2,$alpha:.75);
+    border-color:rgba($color:$dark-cyan-2,$alpha:.25)
+  }
+}
+.btn-secondary{
+  background-color:$dark-grey-2;
+  border-color:$dark-grey-2;
+  &:hover,
+  &:focus,
+  &:not(:disabled):not(.disabled):active{
+    background-color:$dark-grey-3;
+    border-color:$dark-grey-3
+  }
+  &:focus,
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled):active:focus{
+    box-shadow:0 0 0 0.2rem rgba($color:$dark-grey-3,$alpha:.25)
+  }
+  &.disabled,&:disabled{
+    background-color:rgba($color:$dark-grey-3,$alpha:.75);
+    border-color:rgba($color:$dark-grey-3,$alpha:.25)
+  }
+}
+.btn-default{
+  color:$black;
+  &:focus,
+  &:not(:disabled):not(.disabled):active{
+    box-shadow:none
+  }
+}

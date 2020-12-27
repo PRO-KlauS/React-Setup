@@ -1,0 +1,13 @@
+@import "./variables.scss";
+@import "./form.scss";
+@import "./button.scss";
+@import "./modal.scss";
+@import "./table.scss";
+@import "./pagination.scss";
+
+body{
+  letter-spacing:.25px;
+  @include regular-font;
+  color:$black
+}
+  

@@ -1,0 +1,86 @@
+{
+  "name": "esg-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@djthoms/pretty-checkbox": "^3.1.0",
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "@hookform/resolvers": "^1.0.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.20.0",
+    "bootstrap": "^4.5.3",
+    "jwt-decode": "^3.0.0",
+    "moment": "^2.29.1",
+    "node-sass": "^4.14.1",
+    "pretty-checkbox": "^3.0.3",
+    "pretty-checkbox-react": "^3.0.3",
+    "react": "^17.0.0",
+    "react-bootstrap": "^1.4.0",
+    "react-bootstrap-typeahead": "^5.1.2",
+    "react-dom": "^17.0.0",
+    "react-hook-form": "^6.9.5",
+    "react-hot-toast": "^1.0.1",
+    "react-js-pagination": "^3.0.3",
+    "react-pro-sidebar": "^0.4.4",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.4",
+    "react-slick": "^0.27.13",
+    "react-tooltip": "^4.2.11",
+    "recharts": "^1.8.5",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "slick-carousel": "^1.8.1",
+    "yup": "^0.29.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src/**/**/*.js --fix-dry-run",
+    "pretty": "prettier \"src/**/*.js\"",
+    "staging": "REACT_APP_ENV=staging npm start",
+    "production": "REACT_APP_ENV=production npm start",
+    "build:staging": "REACT_APP_ENV=staging npm run build",
+    "build:production": "REACT_APP_ENV=production npm run build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "file-loader": "^6.1.1",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.2",
+    "prettier": "^2.1.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "./**/*.{js,jsx,ts,tsx,md}": [
+      "npx prettier --write",
+      "npm run lint",
+      "git add"
+    ]
+  }
+}

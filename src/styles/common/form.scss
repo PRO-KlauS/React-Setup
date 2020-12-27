@@ -1,0 +1,173 @@
+@import "./variables.scss";
+/* Input CSS */
+.form-group{
+  position:relative;
+  .form-label{
+    color:$dark-grey-3;
+    .required{
+      color:$red-1
+    }
+  }
+  &.with-icon{
+    .form-control{
+      padding-left:40px
+    }
+    i{
+      position:absolute;
+      left:15px;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:9;
+      color:$dark-grey-2
+    }
+  }
+  @media(min-width:300px){
+    margin-bottom:20px;
+    .form-label{
+      font-size:14px
+    }
+  }
+  @media(max-width:299.98px){
+    margin-bottom:15px;
+    .form-label{
+      font-size:12.5px
+    }
+  }
+}
+.form-control{
+  @include regular-font;
+  font-size:14px;
+  color:$black;
+  border-color:$light-grey-3;
+  letter-spacing:.25px;
+  &:focus{
+    box-shadow:none;
+    border-color:$dark-grey-2;
+    color:$black
+  }
+  &:focus ~ i{
+    color:$black
+  }
+}
+.form-control,
+.rbt-input-multi.form-control{
+  height:40px
+}
+.rbt-input-multi.focus{
+  box-shadow:none;
+  border-color:$dark-grey-2;
+  color:$black
+}
+.rbt-input-multi{
+  .rbt-input-wrapper{
+    line-height:30px
+  }
+  .rbt-input-main{
+    margin:0;
+  }
+}
+.input-group > .rbt .rbt-input-hint,
+.input-group > .rbt .rbt-aux{
+  margin:0!important;
+}
+.rbt-token-removeable{
+  margin:2.5px 3px 2.5px 0;
+  font-size:13px;
+}
+.rbt-token{
+  background-color:rgba($color:$dark-cyan-1,$alpha:.3);
+  color:#0f827f;
+  .rbt-token-remove-button{
+    top:0
+  }
+}
+.rbt-menu > .dropdown-item{
+  p{
+    margin:0
+  }
+}
+/* Checkbox */
+.inline-checkbox{
+  display:flex;
+  align-items:center;
+  .form-group{
+    margin-bottom:0
+  }
+  @media(min-width:768px){
+    padding-top:20px;
+    margin-bottom:20px
+  }
+  @media(max-width:767.98px){
+    padding-top:10px;
+    margin-bottom:15px
+  }
+}
+.pretty{
+  .state{
+    label{
+      &:before{
+        border-color:$light-grey-4
+      }
+    }
+  }
+}
+.pretty.p-icon{
+  .state{
+    label{
+      padding-left:12px;
+      text-align:left;
+      &:before,
+      &:after{
+        top:0;
+        width:20px;
+        height:20px
+      }
+    }
+    .icon{
+      top:3px;
+      font-size:11px;
+      left:3.25px
+    }
+  }
+  input{
+    width:20px;
+    height:20px
+  }
+  input:checked ~ .state.p-success-o{
+    .icon{
+      color:$dark-cyan-1
+    }
+    label{
+      &:before{
+        border-color:$dark-cyan-1
+      }
+    }
+  }
+  @media(min-width:300px){
+    .state{
+      label{
+        font-size:14px
+      }
+    }
+  }
+  @media(max-width:299.98px){
+    .state{
+      label{
+        font-size:12.5px
+      }
+    }
+  }
+}
+/* Error and Alert CSS */
+.error-text{
+  color:$red-1;
+  font-size:12px
+}
+.alert{
+  border:none
+}
+.alert-danger{
+  font-size:12px;
+  color:$red-2;
+  background-color:$light-pink
+}

@@ -1,0 +1,132 @@
+@import "./variables.scss";
+
+.table{
+  font-size:13px;
+  margin-bottom:15px;
+  color:$black;
+  thead{
+    th{
+      border-top:none;
+      border-bottom:solid 1px $light-grey-2;
+      background-color:$light-grey;
+      color:$dark-grey-1;
+      vertical-align:top;
+      font-size:13px
+    }
+    th.sorting{
+      cursor:pointer;
+      span{
+        float:left;
+        max-width:calc(100% - 20px);
+        display:inline-block
+      }
+      i{
+        margin:5px 0 0 5px;
+        position:relative;
+        &.fa-sort-up{
+          top:1px
+        }
+        &.fa-sort-down{
+          top:-5px
+        }
+      }
+      &.active,
+      &:hover{
+        color:$blue
+      }
+
+    }
+  }
+  tbody{
+    th,
+    td{
+      border-top:none;
+      border-bottom:solid 1px $light-grey-2
+    }
+    td{
+      .action{
+        padding:0 6px;
+        &:focus{
+          outline:none
+        }
+      }
+      .action.edit,
+      .action.delete,
+      .action.view{
+        color:$dark-grey-2
+      }
+    }
+  }
+  .no-data-msg{
+    td{
+      text-align:center;
+      height:180px;
+      vertical-align:middle;
+      font-size:14px
+    }
+  }
+  .form-group{
+    .pretty{
+      top:-2.5px
+    }
+  }
+  @media(min-width:768px){
+    th,
+    td{
+      padding:.75rem .5rem
+    }
+  }
+  @media(max-width:767.98px){
+    tbody{
+      display:block
+    }
+    .no-data-msg{
+      width:100%;
+      td{
+        display:flex!important;
+        width:100%;
+        align-items:center;
+        justify-content:center
+      }
+    }
+  }
+}
+.table-hover{
+  tbody{
+    tr{
+      &:hover{
+        background-color:rgba($color:$light-grey,$alpha:.5)
+      }
+    }
+  }
+}
+.pagination-row{
+  .counter{
+    font-size:13px;
+    margin:0;
+    span{
+      @include semibold-font
+    }
+  }
+  @media(min-width:576px){
+    display:flex;
+    justify-content:space-between;
+    align-items:center
+  }
+  @media(max-width:767.98px){
+    margin-bottom:15px
+  }
+  @media(min-width:576px) and (max-width:767.98px){
+    margin-top:25px
+  }
+  @media(max-width:575.98px){
+    .counter{
+      text-align:center;
+      margin:20px 0;
+      font-size:11.5px
+    }
+    .pagination{
+      justify-content:center
+    }
+  }
+}
