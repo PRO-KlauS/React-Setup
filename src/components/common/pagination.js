@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactPagination from 'react-js-pagination';
-import { constants } from '../../constants';
+import React from "react";
+import ReactPagination from "react-js-pagination";
+import { constants } from "../../constants";
 
 const Pagination = ({
   page,
@@ -16,7 +16,7 @@ const Pagination = ({
     <div className={`pagination-row ${color}`}>
       {!pageTextHidden && (
         <p className="counter">
-          {pagePlaceholder} <span>{page}</span> {ofPlaceholder}{' '}
+          {pagePlaceholder} <span>{page}</span> {ofPlaceholder}{" "}
           <span>{totalPages}</span> {pageText}
         </p>
       )}

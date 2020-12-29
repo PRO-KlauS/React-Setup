@@ -4,4 +4,8 @@ const getDashBoardDetails = (body) => {
   return get("company/get-dashboard-counts", body);
 };
 
-export { getDashBoardDetails };
+const getCompanies = (body) => {
+  return get("company/get-entities", body);
+};
+
+export { getDashBoardDetails, getCompanies };

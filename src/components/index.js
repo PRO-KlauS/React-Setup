@@ -20,6 +20,7 @@ import ConfirmationModal from "./common/confirmationModal";
 import TagInput from "./common/tagInput";
 import ToolTip from "./common/toolTip";
 import Dropdown from "./common/dropdown";
+import WithLoader from "./common/withLoader";
 export {
   Footer,
   Header,
@@ -43,4 +44,5 @@ export {
   TagInput,
   ToolTip,
   Dropdown,
+  WithLoader,
 };

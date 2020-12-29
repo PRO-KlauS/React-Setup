@@ -1,13 +1,14 @@
-import React from 'react';
-import { Container, Row, Col, Card, Form } from 'react-bootstrap';
-import { Input, Checkbox, Button } from '../../components';
-import { showToast, useStateCallback } from '../../utility/common';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import schema from '../../schema/addNewUser';
-import { constants } from '../../constants';
-import { addNewUser } from '../../apis/manageUsers';
-import '../../styles/addUser.scss';
+import React from "react";
+import { Container, Row, Col, Card, Form } from "react-bootstrap";
+import { useMutation, useQueryClient } from "react-query";
+import { Input, Checkbox, Button } from "../../components";
+import { showToast, useStateCallback } from "../../utility/common";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import schema from "../../schema/addNewUser";
+import { constants } from "../../constants";
+import { addNewUser } from "../../apis/manageUsers";
+import "../../styles/addUser.scss";
 
 const AddNewUser = () => {
   const {
@@ -22,16 +23,45 @@ const AddNewUser = () => {
   } = constants.addNewUser;
 
   const [isLoading, setLoading] = useStateCallback(false);
+  const queryClient = useQueryClient();
+
+  const addUserMutation = useMutation((user) => addNewUser(user), {
+    onMutate: async (text) => {
+      const oldUsers = queryClient.getQueryData(["users", 1, ""]);
+      queryClient.setQueryData(["users", 1, ""], (old) => ({
+        ...old,
+        items: [...old.items, text],
+      }));
+      return oldUsers;
+    },
+    onError: (_, __, oldUsers) => {
+      setLoading(false);
+      queryClient.setQueryData(["users", 1, ""], oldUsers);
+      queryClient.invalidateQueries(["users", 1, ""]);
+    },
+    onSuccess: (res) => {
+      if (res.data.status) {
+        showToast(res.data.message);
+        reset();
+      } else {
+        showToast(res.data.error_message);
+      }
+      setLoading(false);
+      queryClient.invalidateQueries(["users", 1, ""]);
+      // To invalidate all the users queries and automatically fetch last 2 users queries in the background use below code
+      // queryClient.invalidateQueries("users");
+    },
+  });
 
   const { register, handleSubmit, errors, formState, reset } = useForm({
-    mode: 'onChange',
-    reValidateMode: 'onChange',
+    mode: "onChange",
+    reValidateMode: "onChange",
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
       isAdmin: false,
     },
     resolver: yupResolver(schema),
@@ -45,17 +75,7 @@ const AddNewUser = () => {
         is_admin: data.isAdmin,
         password: data.password,
       };
-      addNewUser(body)
-        .then((res) => {
-          if (res.data.status) {
-            showToast(res.data.message);
-            reset();
-          } else {
-            showToast(res.data.error_message);
-          }
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
+      addUserMutation.mutate(body);
     });
   };
   const { touched } = formState;

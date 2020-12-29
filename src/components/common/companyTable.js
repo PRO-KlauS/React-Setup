@@ -1,8 +1,8 @@
-import React from 'react';
-import { Table, Checkbox, Button, ToolTip } from '../index';
-import { formatDate } from '../../utility/common';
-import { sortingMethodIconMapper } from '../../utility/mapper';
-import { constants } from '../../constants';
+import React from "react";
+import { Table, Checkbox, Button, ToolTip } from "../index";
+import { formatDate } from "../../utility/common";
+import { sortingMethodIconMapper } from "../../utility/mapper";
+import { constants } from "../../constants";
 
 const CompanyTable = ({
   page,
@@ -12,7 +12,6 @@ const CompanyTable = ({
   pageCount,
   totalItemsCount,
   items,
-  history,
   onSelectCheckbox,
   onSelectHeaderCheckbox,
   selectedCompanies,
@@ -23,12 +22,10 @@ const CompanyTable = ({
   onHeaderClick,
 }) => {
   const { selectAllCompaniesTooltip } = constants.tooltips;
-  const navigateToCompanyPage = (company) =>
-    history.push(`/company-details/${company.id}`, company);
   const { pageText, buttons, headers } = constants.companyTable;
   headers[1] = {
     ...headers[1],
-    className: sortMethod === 'both' ? 'sorting' : 'active sorting',
+    className: sortMethod === "both" ? "sorting" : "active sorting",
     onHeaderClick: onHeaderClick,
     icons: [{ className: sortingMethodIconMapper[sortMethod] }],
   };
@@ -64,7 +61,8 @@ const CompanyTable = ({
       pageCount={pageCount}
       totalItemsCount={totalItemsCount}
       headers={tableHeaders}
-      onPageChange={onPageChange}>
+      onPageChange={onPageChange}
+    >
       {items &&
         items.length > 0 &&
         items.map((item, index) => {
@@ -72,31 +70,24 @@ const CompanyTable = ({
             <tr key={item.id}>
               <td>{(page - 1) * 10 + index + 1}</td>
               <td>
-                <a
-                  href="javascript:;"
-                  onClick={() => navigateToCompanyPage(item)}>
-                  {item.name}
-                </a>
+                <a href="javascript:;">{item.name}</a>
               </td>
               <td>
-                {(item.verified_response && item.verified_response['sector']) ||
-                  '-'}
+                {(item.verified_response && item.verified_response["sector"]) ||
+                  "-"}
               </td>
               <td>
                 {(item.verified_response &&
-                  item.verified_response['funding stage']) ||
-                  '-'}
+                  item.verified_response["funding stage"]) ||
+                  "-"}
               </td>
               <td>
-                {(item.verified_response && item.verified_response['uen']) ||
-                  '-'}
+                {(item.verified_response && item.verified_response["uen"]) ||
+                  "-"}
               </td>
               <td>{item.updated_on && formatDate(item.updated_on)}</td>
               <td>
-                <a
-                  href="javascript:;"
-                  className="action view"
-                  onClick={() => navigateToCompanyPage(item)}>
+                <a href="javascript:;" className="action view">
                   <i className="fas fa-eye" />
                 </a>
               </td>
