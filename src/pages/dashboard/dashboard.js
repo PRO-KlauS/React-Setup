@@ -1,6 +1,6 @@
-import React from "react";
-import { Container, Row, Card, Tabs, Tab, Form } from "react-bootstrap";
-import { useQuery, useQueryClient } from "react-query";
+import React from 'react';
+import { Container, Row, Card, Tabs, Tab, Form } from 'react-bootstrap';
+import { useQuery, useQueryClient } from 'react-query';
 import {
   DetailCard,
   Input,
@@ -11,29 +11,44 @@ import {
   ToolTip,
   Dropdown,
   WithLoader,
-} from "../../components";
-import { getCompanies, getDashBoardDetails } from "../../apis/dashboard";
-import { showToast, useStateCallback } from "../../utility/common";
-import { constants } from "../../constants";
-import { sortingMethodIconMapper } from "../../utility/mapper";
-import "../../styles/dashboard.scss";
+} from '../../components';
+import { getCompanies, getDashBoardDetails } from '../../apis/dashboard';
+import { showToast, useStateCallback } from '../../utility/common';
+import { constants } from '../../constants';
+import { sortingMethodIconMapper } from '../../utility/mapper';
+import '../../styles/dashboard.scss';
 
 const Dashboard = ({ profile }) => {
+  const queryClient = useQueryClient();
+  const getCachedCompaniesFromQueryData = (queryKey) => {
+    const res = queryClient.getQueryData(queryKey);
+    let newCompanies;
+    if (res && res.data) {
+      newCompanies = {
+        items: res.data.data || [],
+        totalItemCount: (res.data.pagination && res.data.pagination.count) || 0,
+        totalPages: (res.data.pagination && res.data.pagination.pages) || 0,
+      };
+    }
+    return newCompanies;
+  };
+
   const [state, setState] = useStateCallback({
-    searchValue: "",
-    searchedValue: "",
+    searchValue: '',
+    searchedValue: '',
     selectedCompanies: [],
     isHeaderCheckBoxSelected: false,
-    activeTab: "companies",
+    activeTab: 'companies',
     page: 1,
     isUpdateBtnLoading: false,
-    sortMethod: "both",
-    selectedDropdown: { value: "All", key: "all" },
-    companies: {
-      items: [],
-      totalItemCount: 0,
-      totalPages: 0,
-    },
+    sortMethod: 'both',
+    selectedDropdown: { value: 'All', key: 'all' },
+    companies: getCachedCompaniesFromQueryData([
+      'companies',
+      1,
+      '',
+      'companies',
+    ]),
     dashboardDetails: {
       entities: 0,
       urls: 0,
@@ -61,38 +76,25 @@ const Dashboard = ({ profile }) => {
     let body = {
       search: searchedValue,
       page: page,
-      is_company_and_new: activeTab === "companies",
-      is_new: activeTab === "new-entities",
-      is_suspended: activeTab === "suspended-entities",
+      is_company_and_new: activeTab === 'companies',
+      is_new: activeTab === 'new-entities',
+      is_suspended: activeTab === 'suspended-entities',
     };
     if (
-      activeTab !== "new-entities" &&
+      activeTab !== 'new-entities' &&
       selectedDropdown &&
-      selectedDropdown.value !== "All"
+      selectedDropdown.value !== 'All'
     ) {
       body.entity_type = selectedDropdown.value;
     }
-    if (sortMethod !== "both") {
+    if (sortMethod !== 'both') {
       body.sort_by = sortMethod;
     }
     return body;
   };
 
-  const getCachedCompaniesFromQueryData = (queryKey) => {
-    const res = queryClient.getQueryData(queryKey);
-    let newCompanies;
-    if (res && res.data) {
-      newCompanies = {
-        items: res.data.data || [],
-        totalItemCount: (res.data.pagination && res.data.pagination.count) || 0,
-        totalPages: (res.data.pagination && res.data.pagination.pages) || 0,
-      };
-    }
-    return newCompanies;
-  };
-
   const { isLoading: isDetailsLoading } = useQuery(
-    "dashboard-details",
+    'dashboard-details',
     () => getDashBoardDetails(),
     {
       onSuccess: (res) => {
@@ -107,12 +109,12 @@ const Dashboard = ({ profile }) => {
         };
         setState({ ...state, dashboardDetails: newDashboardDetails });
       },
-    }
+    },
   );
 
   const { isLoading: isListLoading } = useQuery(
     [
-      "companies",
+      'companies',
       page,
       searchedValue,
       activeTab,
@@ -140,14 +142,12 @@ const Dashboard = ({ profile }) => {
         setState({ ...state, companies: newCompanies });
       },
       staleTime: 10000,
-    }
+    },
   );
-
-  const queryClient = useQueryClient();
 
   queryClient.prefetchQuery(
     [
-      "companies",
+      'companies',
       page + 1,
       searchedValue,
       activeTab,
@@ -161,12 +161,12 @@ const Dashboard = ({ profile }) => {
     },
     {
       staleTime: 10000,
-    }
+    },
   );
 
   const onPageChange = (page) => {
     const newCompanies = getCachedCompaniesFromQueryData([
-      "companies",
+      'companies',
       page,
       searchedValue,
       activeTab,
@@ -182,12 +182,12 @@ const Dashboard = ({ profile }) => {
         companies: newCompanies || companies,
       },
       () => {
-        let elem = document.getElementById("dashboard-tabs-tab-companies");
+        let elem = document.getElementById('dashboard-tabs-tab-companies');
         window.scrollTo({
           top: elem.offsetTop - 70,
-          behavior: "smooth",
+          behavior: 'smooth',
         });
-      }
+      },
     );
   };
 
@@ -198,7 +198,7 @@ const Dashboard = ({ profile }) => {
   const onSearchCompanies = (e) => {
     e.preventDefault();
     const newCompanies = getCachedCompaniesFromQueryData([
-      "companies",
+      'companies',
       1,
       searchValue,
       activeTab,
@@ -215,7 +215,7 @@ const Dashboard = ({ profile }) => {
 
   const onTabChange = (tab) => {
     const newCompanies = getCachedCompaniesFromQueryData([
-      "companies",
+      'companies',
       page,
       searchedValue,
       tab,
@@ -224,15 +224,15 @@ const Dashboard = ({ profile }) => {
     ]);
     setState({
       ...state,
-      searchValue: "",
-      searchedValue: "",
+      searchValue: '',
+      searchedValue: '',
       selectedCompanies: [],
       isHeaderCheckBoxSelected: false,
       activeTab: tab,
       isUpdateBtnLoading: false,
       page: 1,
-      sortMethod: "both",
-      selectedDropdown: { value: "All", key: "all" },
+      sortMethod: 'both',
+      selectedDropdown: { value: 'All', key: 'all' },
       companies: newCompanies || companies,
     });
   };
@@ -242,7 +242,7 @@ const Dashboard = ({ profile }) => {
         ...state,
         isHeaderCheckBoxSelected: false,
         selectedCompanies: selectedCompanies.filter(
-          (companyID) => companyID !== id
+          (companyID) => companyID !== id,
         ),
       });
     } else {
@@ -278,17 +278,17 @@ const Dashboard = ({ profile }) => {
 
   const onHeaderClick = () => {
     const newCompanies = getCachedCompaniesFromQueryData([
-      "companies",
+      'companies',
       page,
       searchValue,
       activeTab,
       selectedDropdown.value,
-      sortMethod === "both" ? "ASC" : sortMethod === "ASC" ? "DESC" : "ASC",
+      sortMethod === 'both' ? 'ASC' : sortMethod === 'ASC' ? 'DESC' : 'ASC',
     ]);
     setState({
       ...state,
       sortMethod:
-        sortMethod === "both" ? "ASC" : sortMethod === "ASC" ? "DESC" : "ASC",
+        sortMethod === 'both' ? 'ASC' : sortMethod === 'ASC' ? 'DESC' : 'ASC',
       companies: newCompanies || companies,
     });
   };
@@ -311,7 +311,7 @@ const Dashboard = ({ profile }) => {
   } = constants.dashboard;
   newEntityHeaders[1] = {
     ...newEntityHeaders[1],
-    className: sortMethod === "both" ? "" : "active",
+    className: sortMethod === 'both' ? '' : 'active',
     onHeaderClick: onHeaderClick,
     icons: [{ className: sortingMethodIconMapper[sortMethod] }],
   };
@@ -353,8 +353,7 @@ const Dashboard = ({ profile }) => {
           onSelect={onTabChange}
           activeKey={activeTab}
           mountOnEnter={true}
-          className="no-bdr"
-        >
+          className="no-bdr">
           <Tab eventKey="companies" title={tabTitles[0]}>
             <Card className="no-top-radius companies">
               <Card.Body className="pad-2">
@@ -447,8 +446,7 @@ const Dashboard = ({ profile }) => {
                   pageCount={totalPages}
                   totalItemsCount={totalItemCount}
                   headers={newEntityHeaders}
-                  onPageChange={onPageChange}
-                >
+                  onPageChange={onPageChange}>
                   {items &&
                     items.length > 0 &&
                     items.map((item, index) => {
@@ -462,28 +460,24 @@ const Dashboard = ({ profile }) => {
                                 href="javascript:;"
                                 className="reject"
                                 data-tip
-                                data-for={"remove-company" + item.id}
-                              >
+                                data-for={'remove-company' + item.id}>
                                 <i className="fas fa-times-circle" />
                               </a>
                               <a
                                 href="javascript:;"
                                 className="approve"
                                 data-tip
-                                data-for={"add-company" + item.id}
-                              >
+                                data-for={'add-company' + item.id}>
                                 <i className="fas fa-check-circle" />
                               </a>
                               <ToolTip
-                                id={"remove-company" + item.id}
-                                place="left"
-                              >
+                                id={'remove-company' + item.id}
+                                place="left">
                                 {removeCompanyTooltip}
                               </ToolTip>
                               <ToolTip
-                                id={"add-company" + item.id}
-                                place="left"
-                              >
+                                id={'add-company' + item.id}
+                                place="left">
                                 {addCompanyTooltip}
                               </ToolTip>
                             </div>

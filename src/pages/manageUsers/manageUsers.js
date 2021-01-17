@@ -1,37 +1,21 @@
-import React from "react";
-import { Container, Card, Form } from "react-bootstrap";
-import { useQuery, useQueryClient } from "react-query";
-import { Table, Input, Button, WithLoader } from "../../components";
-import { getUserList } from "../../apis/manageUsers";
-import { showToast, useStateCallback } from "../../utility/common";
-import { constants } from "../../constants";
-import "../../styles/manageUsers.scss";
+import React from 'react';
+import { Container, Card, Form } from 'react-bootstrap';
+import { useQuery, useQueryClient } from 'react-query';
+import { Table, Input, Button, WithLoader } from '../../components';
+import { getUserList } from '../../apis/manageUsers';
+import { showToast, useStateCallback } from '../../utility/common';
+import { constants } from '../../constants';
+import '../../styles/manageUsers.scss';
 
 const ManageUsers = ({ history, profile }) => {
-  const [state, setState] = useStateCallback({
-    page: 1,
-    searchValue: "",
-    searchedValue: "",
-    isButtonLoading: false,
-    users: {
+  const queryClient = useQueryClient();
+  const getCachedUsersFromQueryData = (queryKey) => {
+    const res = queryClient.getQueryData(queryKey);
+    let newUsers = {
       items: [],
       totalItemCount: 0,
       totalPages: 0,
-    },
-  });
-  const { isButtonLoading, page, searchValue, searchedValue, users } = state;
-
-  const generateBody = () => {
-    return {
-      page: page,
-      is_active: true,
-      search: searchedValue,
     };
-  };
-
-  const getCachedUsersFromQueryData = (queryKey) => {
-    const res = queryClient.getQueryData(queryKey);
-    let newUsers;
     if (res && res.data) {
       newUsers = {
         items: (res.data && res.data.data && res.data.data.users) || [],
@@ -44,8 +28,25 @@ const ManageUsers = ({ history, profile }) => {
     return newUsers;
   };
 
+  const [state, setState] = useStateCallback({
+    page: 1,
+    searchValue: '',
+    searchedValue: '',
+    isButtonLoading: false,
+    users: getCachedUsersFromQueryData(['users', 1, '']),
+  });
+  const { isButtonLoading, page, searchValue, searchedValue, users } = state;
+
+  const generateBody = () => {
+    return {
+      page: page,
+      is_active: true,
+      search: searchedValue,
+    };
+  };
+
   const { isLoading } = useQuery(
-    ["users", page, searchedValue],
+    ['users', page, searchedValue],
     () => {
       const body = generateBody();
       return getUserList(body);
@@ -67,12 +68,11 @@ const ManageUsers = ({ history, profile }) => {
         setState({ ...state, users: newUsers });
       },
       staleTime: 10000,
-    }
+    },
   );
 
-  const queryClient = useQueryClient();
   queryClient.prefetchQuery(
-    ["users", page + 1, searchedValue],
+    ['users', page + 1, searchedValue],
     () => {
       const body = generateBody();
       body.page = page + 1;
@@ -80,19 +80,19 @@ const ManageUsers = ({ history, profile }) => {
     },
     {
       staleTime: 10000,
-    }
+    },
   );
 
   const onPageChange = (page) => {
     const newUsers = getCachedUsersFromQueryData([
-      "users",
+      'users',
       page,
       searchedValue,
     ]);
     setState({ ...state, page: page, users: newUsers || users }, () => {
       window.scrollTo({
         top: 0,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     });
   };
@@ -101,7 +101,7 @@ const ManageUsers = ({ history, profile }) => {
   };
   const onSearchUser = (e) => {
     e.preventDefault();
-    const newUsers = getCachedUsersFromQueryData(["users", 1, searchValue]);
+    const newUsers = getCachedUsersFromQueryData(['users', 1, searchValue]);
     setState({
       ...state,
       searchedValue: searchValue,
@@ -113,7 +113,7 @@ const ManageUsers = ({ history, profile }) => {
     history.push(`/edit-user/${user.id}`, user);
   };
   const onAddUser = () => {
-    history.push("/add-new-user");
+    history.push('/add-new-user');
   };
   const { items, totalItemCount, totalPages } = users;
   const {
@@ -165,8 +165,7 @@ const ManageUsers = ({ history, profile }) => {
               pageCount={totalPages}
               totalItemsCount={totalItemCount}
               headers={headers}
-              onPageChange={onPageChange}
-            >
+              onPageChange={onPageChange}>
               {items &&
                 items.length > 0 &&
                 items.map((item, index) => {
