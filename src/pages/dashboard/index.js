@@ -1,6 +1,6 @@
-import { connect } from "react-redux";
-import Dashboard from "./dashboard";
-import { setDashboardData } from "../../actions/dashboard";
+import { connect } from 'react-redux';
+import Dashboard from './components/dashboard';
+import { setDashboardData } from './actions/dashboard';
 
 const mapStateToProps = (state) => ({
   dashboardDetails: state.dashboardDetails,

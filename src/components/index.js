@@ -1,25 +1,24 @@
-import Footer from "./common/footer";
-import Header from "./header/header";
-import Sidebar from "./common/sidebar";
-import Input from "./common/input";
-import Checkbox from "./common/checkbox";
-import Button from "./common/button";
-import DetailCard from "./common/detailCard";
-import HeaderDropdown from "./header/headerDropdown";
-import Modal from "./common/modal";
-import ChangePasswordModal from "./profile/changePasswordModal";
-import FullScreenLoader from "./common/fullScreenLoader";
-import Table from "./common/table";
-import UserLayout from "./common/userLayout";
-import AdminLayout from "./common/adminLayout";
-import CompanyTable from "./common/companyTable";
-import Pagination from "./common/pagination";
-import Slider from "./common/slider";
-import DataCard from "./common/dataCard";
-import ConfirmationModal from "./common/confirmationModal";
-import TagInput from "./common/tagInput";
-import ToolTip from "./common/toolTip";
-import Dropdown from "./common/dropdown";
+import Footer from './footer';
+import Header from './header';
+import Sidebar from './sidebar';
+import Input from './input';
+import Checkbox from './checkbox';
+import Button from './button';
+import DetailCard from './detailCard';
+import HeaderDropdown from './headerDropdown';
+import Modal from './modal';
+import FullScreenLoader from './fullScreenLoader';
+import Table from './table';
+import UserLayout from './userLayout';
+import AdminLayout from './adminLayout';
+import CompanyTable from './companyTable';
+import Pagination from './pagination';
+import Slider from './slider';
+import DataCard from './dataCard';
+import ConfirmationModal from './confirmationModal';
+import TagInput from './tagInput';
+import ToolTip from './toolTip';
+import Dropdown from './dropdown';
 export {
   Footer,
   Header,
@@ -30,7 +29,6 @@ export {
   DetailCard,
   HeaderDropdown,
   Modal,
-  ChangePasswordModal,
   FullScreenLoader,
   Table,
   UserLayout,

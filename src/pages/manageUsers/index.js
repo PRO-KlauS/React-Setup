@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import manageUsers from './manageUsers';
-import { getUsers } from '../../actions/manageUsers';
+import manageUsers from './components/manageUsers';
+import { getUsers } from './actions/manageUsers';
 
 const mapStateToProps = (state) => ({
   users: state.users,
