@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Card, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { Table, Input, Button } from '../../components';
+import { getUsers } from '../../actions/manageUsers';
 import { showToast, useStateCallback } from '../../utility/common';
 import { constants } from '../../constants';
 import '../../styles/manageUsers.scss';
 
-const ManageUsers = ({ getUsers, users, history, profile }) => {
+const ManageUsers = ({ history }) => {
+  const dispatch = useDispatch();
+  const { users, profile } = useSelector((state) => ({
+    users: state.users,
+    profile: state.profile,
+  }));
+
   useEffect(() => {
-    getUsers({ search: '', page: 1, is_active: true }).then((res) => {
+    dispatch(getUsers({ search: '', page: 1, is_active: true })).then((res) => {
       if (!res.status) {
         showToast(res.error_message);
       }
@@ -18,16 +26,16 @@ const ManageUsers = ({ getUsers, users, history, profile }) => {
   const [isButtonLoading, setButtonLoading] = useStateCallback(false);
   const onPageChange = (page) => {
     setPage(page, () =>
-      getUsers({ search: searchValue, page: page, is_active: true }).then(
-        (res) => {
-          if (res.status) {
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth',
-            });
-          }
-        },
-      ),
+      dispatch(
+        getUsers({ search: searchValue, page: page, is_active: true }),
+      ).then((res) => {
+        if (res.status) {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
+        }
+      }),
     );
   };
   const onSearchValueChange = (e) => {
@@ -36,7 +44,7 @@ const ManageUsers = ({ getUsers, users, history, profile }) => {
   const onSearchUser = () => {
     setButtonLoading(true, () => {
       setPage(1);
-      getUsers({ search: searchValue, page: 1, is_active: true })
+      dispatch(getUsers({ search: searchValue, page: 1, is_active: true }))
         .then((res) => {
           if (!res.status) {
             showToast(res.error_message);

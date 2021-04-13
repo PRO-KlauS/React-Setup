@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button, ChangePasswordModal } from '../../components';
+import { updateProfileData } from '../../actions/profile';
 import { changePassword } from '../../apis/profile';
 import { useStateCallback, saveToken, showToast } from '../../utility/common';
 import { useForm } from 'react-hook-form';
@@ -9,7 +11,7 @@ import schema from '../../schema/profile';
 import { constants } from '../../constants';
 import '../../styles/profile.scss';
 
-const Profile = ({ profile, updateProfileData }) => {
+const Profile = () => {
   const {
     buttons,
     emailPlaceholder,
@@ -22,6 +24,10 @@ const Profile = ({ profile, updateProfileData }) => {
   const [isUpdateBtnLoading, setUpdateBtnLoading] = useStateCallback(false);
   const [isChangeBtnLoading, setChangeBtnLoading] = useStateCallback(false);
   const [isModalVisible, setModalVisible] = useState(false);
+  const dispatch = useDispatch();
+  const { profile } = useSelector((state) => ({
+    profile: state.profile,
+  }));
 
   const toggleModal = () => setModalVisible(!isModalVisible);
 
@@ -40,7 +46,7 @@ const Profile = ({ profile, updateProfileData }) => {
         first_name: data.firstName,
         last_name: data.lastName,
       };
-      updateProfileData(profile.id, body)
+      dispatch(updateProfileData(profile.id, body))
         .then((res) => {
           if (res.status) {
             showToast(res.message);

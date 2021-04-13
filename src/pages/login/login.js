@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Container, Alert } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { Input, Button } from '../../components';
 import { showToast, useStateCallback } from '../../utility/common';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../schema/login';
+import { setUserToken } from '../../actions/login';
 import { constants, messages } from '../../constants';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/common/form.scss';
 import '../../styles/common/button.scss';
 import '../../styles/login.scss';
 
-const Login = ({ setUserToken }) => {
+const Login = () => {
   useEffect(() => {
     if (localStorage.getItem('SHOW_TOAST')) {
       localStorage.removeItem('SHOW_TOAST');
@@ -27,6 +29,7 @@ const Login = ({ setUserToken }) => {
 
   const [isLoading, setLoading] = useStateCallback(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const dispatch = useDispatch();
 
   const { register, handleSubmit, errors, formState } = useForm({
     mode: 'onChange',
@@ -40,7 +43,7 @@ const Login = ({ setUserToken }) => {
   });
   const onSubmit = (data) => {
     setLoading(true, () => {
-      setUserToken(data)
+      dispatch(setUserToken(data))
         .then((res) => {
           if (!res.status) {
             setErrorMessage(res.error_message);
@@ -48,6 +51,14 @@ const Login = ({ setUserToken }) => {
           setLoading(false);
         })
         .catch(() => setLoading(false));
+      // setUserToken(data)
+      //   .then((res) => {
+      //     if (!res.status) {
+      //       setErrorMessage(res.error_message);
+      //     }
+      //     setLoading(false);
+      //   })
+      //   .catch(() => setLoading(false));
     });
   };
   const { touched } = formState;

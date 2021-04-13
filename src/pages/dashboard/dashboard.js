@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   DetailCard,
   Input,
@@ -8,37 +9,37 @@ import {
   Table,
   ToolTip,
   Dropdown,
-} from "../../components";
-import { showToast, useStateCallback } from "../../utility/common";
-import { Container, Row, Card, Tabs, Tab, Form } from "react-bootstrap";
-import { constants } from "../../constants";
-import { sortingMethodIconMapper } from "../../utility/mapper";
-import "../../styles/dashboard.scss";
+} from '../../components';
+import { setDashboardData } from '../../actions/dashboard';
+import { showToast, useStateCallback } from '../../utility/common';
+import { Container, Row, Card, Tabs, Tab, Form } from 'react-bootstrap';
+import { constants } from '../../constants';
+import { sortingMethodIconMapper } from '../../utility/mapper';
+import '../../styles/dashboard.scss';
 
-const Dashboard = ({
-  dashboardDetails,
-  companies,
-  setDashboardData,
-  history,
-  profile,
-  addCompany,
-  removeCompany,
-}) => {
+const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
+  const dispatch = useDispatch();
+  const { dashboardDetails, profile } = useSelector((state) => ({
+    dashboardDetails: state.dashboardDetails,
+    profile: state.profile,
+  }));
+
   useEffect(() => {
-    setDashboardData();
+    dispatch(setDashboardData());
   }, []);
   const { items = [], totalItemCount, totalPages } = companies || {};
   const [state, setState] = useStateCallback({
-    searchValue: "",
+    searchValue: '',
     selectedCompanies: [],
     isHeaderCheckBoxSelected: false,
-    activeTab: "companies",
+    activeTab: 'companies',
     page: 1,
     isButtonLoading: false,
     isUpdateBtnLoading: false,
-    sortMethod: "both",
-    selectedDropdown: { value: "All", key: "all" },
+    sortMethod: 'both',
+    selectedDropdown: { value: 'All', key: 'all' },
   });
+
   const {
     searchValue,
     selectedCompanies,
@@ -61,22 +62,22 @@ const Dashboard = ({
       () => {
         let body = {
           page: page,
-          is_company_and_new: activeTab === "companies",
-          is_new: activeTab === "new-entities",
-          is_suspended: activeTab === "suspended-entities",
+          is_company_and_new: activeTab === 'companies',
+          is_new: activeTab === 'new-entities',
+          is_suspended: activeTab === 'suspended-entities',
         };
         if (
-          activeTab !== "new-entities" &&
+          activeTab !== 'new-entities' &&
           selectedDropdown &&
-          selectedDropdown.value !== "All"
+          selectedDropdown.value !== 'All'
         ) {
           body.entity_type = selectedDropdown.value;
         }
-        if (sortMethod !== "both") {
+        if (sortMethod !== 'both') {
           body.sort_by = sortMethod;
         }
         // Do API cal with all the details
-      }
+      },
     );
   };
   const onSearchValueChange = (e) => {
@@ -93,22 +94,22 @@ const Dashboard = ({
         let body = {
           search: searchValue,
           page: 1,
-          is_company_and_new: activeTab === "companies",
-          is_new: activeTab === "new-entities",
-          is_suspended: activeTab === "suspended-entities",
+          is_company_and_new: activeTab === 'companies',
+          is_new: activeTab === 'new-entities',
+          is_suspended: activeTab === 'suspended-entities',
         };
         if (
-          activeTab !== "new-entities" &&
+          activeTab !== 'new-entities' &&
           selectedDropdown &&
-          selectedDropdown.value !== "All"
+          selectedDropdown.value !== 'All'
         ) {
           body.entity_type = selectedDropdown.value;
         }
-        if (sortMethod !== "both") {
+        if (sortMethod !== 'both') {
           body.sort_by = sortMethod;
         }
         // Do API call with all the details
-      }
+      },
     );
   };
   const onTabChange = (tab) => {
@@ -116,18 +117,18 @@ const Dashboard = ({
       {
         ...state,
         isButtonLoading: false,
-        searchValue: "",
+        searchValue: '',
         selectedCompanies: [],
         isHeaderCheckBoxSelected: false,
         activeTab: tab,
         isUpdateBtnLoading: false,
         page: 1,
-        sortMethod: "both",
-        selectedDropdown: { value: "All", key: "all" },
+        sortMethod: 'both',
+        selectedDropdown: { value: 'All', key: 'all' },
       },
       () => {
         // Do API call
-      }
+      },
     );
   };
   const onSelectCheckbox = (id) => {
@@ -136,7 +137,7 @@ const Dashboard = ({
         ...state,
         isHeaderCheckBoxSelected: false,
         selectedCompanies: selectedCompanies.filter(
-          (companyID) => companyID !== id
+          (companyID) => companyID !== id,
         ),
       });
     } else {
@@ -202,28 +203,28 @@ const Dashboard = ({
       {
         ...state,
         sortMethod:
-          sortMethod === "both" ? "ASC" : sortMethod === "ASC" ? "DESC" : "ASC",
+          sortMethod === 'both' ? 'ASC' : sortMethod === 'ASC' ? 'DESC' : 'ASC',
       },
       ({ sortMethod }) => {
         let body = {
           search: searchValue,
           page: 1,
-          is_company_and_new: activeTab === "companies",
-          is_new: activeTab === "new-entities",
-          is_suspended: activeTab === "suspended-entities",
+          is_company_and_new: activeTab === 'companies',
+          is_new: activeTab === 'new-entities',
+          is_suspended: activeTab === 'suspended-entities',
         };
         if (
-          activeTab !== "new-entities" &&
+          activeTab !== 'new-entities' &&
           selectedDropdown &&
-          selectedDropdown.value !== "All"
+          selectedDropdown.value !== 'All'
         ) {
           body.entity_type = selectedDropdown.value;
         }
-        if (sortMethod !== "both") {
+        if (sortMethod !== 'both') {
           body.sort_by = sortMethod;
         }
         // Do API call with all the details
-      }
+      },
     );
   };
 
@@ -232,18 +233,18 @@ const Dashboard = ({
       let body = {
         search: searchValue,
         page: 1,
-        is_company_and_new: activeTab === "companies",
-        is_new: activeTab === "new-entities",
-        is_suspended: activeTab === "suspended-entities",
+        is_company_and_new: activeTab === 'companies',
+        is_new: activeTab === 'new-entities',
+        is_suspended: activeTab === 'suspended-entities',
       };
       if (
-        activeTab !== "new-entities" &&
+        activeTab !== 'new-entities' &&
         selected &&
-        selected.value !== "All"
+        selected.value !== 'All'
       ) {
         body.entity_type = selected.value;
       }
-      if (sortMethod !== "both") {
+      if (sortMethod !== 'both') {
         body.sort_by = sortMethod;
       }
       // Do API call with all the details
@@ -264,7 +265,7 @@ const Dashboard = ({
   } = constants.dashboard;
   newEntityHeaders[1] = {
     ...newEntityHeaders[1],
-    className: sortMethod === "both" ? "" : "active",
+    className: sortMethod === 'both' ? '' : 'active',
     onHeaderClick: onHeaderClick,
     icons: [{ className: sortingMethodIconMapper[sortMethod] }],
   };
@@ -305,8 +306,7 @@ const Dashboard = ({
         onSelect={onTabChange}
         activeKey={activeTab}
         mountOnEnter={true}
-        className="no-bdr"
-      >
+        className="no-bdr">
         <Tab eventKey="companies" title={tabTitles[0]}>
           <Card className="no-top-radius companies">
             <Card.Body className="pad-2">
@@ -404,8 +404,7 @@ const Dashboard = ({
                 pageCount={totalPages}
                 totalItemsCount={totalItemCount}
                 headers={newEntityHeaders}
-                onPageChange={onPageChange}
-              >
+                onPageChange={onPageChange}>
                 {items &&
                   items.length > 0 &&
                   items.map((item, index) => {
@@ -419,27 +418,24 @@ const Dashboard = ({
                               href="javascript:;"
                               className="reject"
                               data-tip
-                              data-for={"remove-company" + item.id}
-                              onClick={() => onRemoveCompany(item.id)}
-                            >
+                              data-for={'remove-company' + item.id}
+                              onClick={() => onRemoveCompany(item.id)}>
                               <i className="fas fa-times-circle" />
                             </a>
                             <a
                               href="javascript:;"
                               className="approve"
                               data-tip
-                              data-for={"add-company" + item.id}
-                              onClick={() => onAddCompany(item.id)}
-                            >
+                              data-for={'add-company' + item.id}
+                              onClick={() => onAddCompany(item.id)}>
                               <i className="fas fa-check-circle" />
                             </a>
                             <ToolTip
-                              id={"remove-company" + item.id}
-                              place="left"
-                            >
+                              id={'remove-company' + item.id}
+                              place="left">
                               {removeCompanyTooltip}
                             </ToolTip>
-                            <ToolTip id={"add-company" + item.id} place="left">
+                            <ToolTip id={'add-company' + item.id} place="left">
                               {addCompanyTooltip}
                             </ToolTip>
                           </div>
