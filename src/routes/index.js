@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
   useLocation,
-} from "react-router-dom";
-import { connect } from "react-redux";
-import { Toaster } from "react-hot-toast";
-import { setReduxLoaderCount } from "../actions/loader";
-import UserRoute from "./userRoute";
-import AdminRoute from "./adminRoute";
-import Login from "../pages/login";
-import AddNewUser from "../pages/addNewUser";
-import Profile from "../pages/profile";
-import Dashboard from "../pages/dashboard";
-import ManageUsers from "../pages/manageUsers";
-import EditUser from "../pages/editUser";
+} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Toaster } from 'react-hot-toast';
+import { setReduxLoaderCount } from '../actions/loader';
+import UserRoute from './userRoute';
+import AdminRoute from './adminRoute';
+import Login from '../pages/login';
+import AddNewUser from '../pages/addNewUser';
+import Profile from '../pages/profile';
+import Dashboard from '../pages/dashboard';
+import ManageUsers from '../pages/manageUsers';
+import EditUser from '../pages/editUser';
 
 // To lazy load the components and for better code splitting
 // const Login = lazy(() => import("../pages/login"));
@@ -29,18 +29,24 @@ const ScrollToTop = (props) => {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   }, [pathname]);
   return props.children;
 };
 
-const Routes = ({ token, loaderCount, setReduxLoaderCount, profile }) => {
-  useEffect(() => {
-    loaderCount > 0 && setReduxLoaderCount(0);
-  }, []);
+const Routes = () => {
+  const { profile, token, loaderCount } = useSelector((state) => ({
+    token: state.token,
+    loaderCount: state.loaderCount,
+    profile: state.profile,
+  }));
   let isAuthenticated = token;
   let isAdmin = profile && profile.is_admin;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    loaderCount > 0 && dispatch(setReduxLoaderCount(0));
+  }, []);
   return (
     <Router>
       {/* <Suspense fallback={<FullScreenLoader />}> */}
@@ -50,7 +56,7 @@ const Routes = ({ token, loaderCount, setReduxLoaderCount, profile }) => {
             exact
             path="/"
             render={() => (
-              <Redirect to={isAuthenticated ? "/dashboard" : "/login"} />
+              <Redirect to={isAuthenticated ? '/dashboard' : '/login'} />
             )}
           />
           <Route
@@ -115,14 +121,4 @@ const Routes = ({ token, loaderCount, setReduxLoaderCount, profile }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  token: state.token,
-  loaderCount: state.loaderCount,
-  profile: state.profile,
-});
-
-const mapDispatchToProps = {
-  setReduxLoaderCount,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Routes);
+export default Routes;

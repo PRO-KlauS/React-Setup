@@ -21,9 +21,14 @@ const EditUser = ({ history }) => {
 
   const [isLoading, setLoading] = useStateCallback(false);
 
-  const { first_name, last_name, email, id, is_admin } = history.location.state;
+  const { first_name, last_name, email, id, is_admin } =
+    history?.location?.state || {};
 
-  const { register, handleSubmit, errors, formState } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, touchedFields },
+  } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {
@@ -52,7 +57,6 @@ const EditUser = ({ history }) => {
         .catch(() => setLoading(false));
     });
   };
-  const { touched } = formState;
 
   return (
     <Container>
@@ -67,9 +71,8 @@ const EditUser = ({ history }) => {
                     <Input
                       controlId="formFirstName"
                       error={errors.firstName && errors.firstName.message}
-                      showError={touched && touched.firstName}
-                      inputRef={register}
-                      name="firstName"
+                      showError={touchedFields && touchedFields.firstName}
+                      registeredEvents={register('firstName')}
                       isRequired={true}
                       label={firstNamePlaceholder}
                     />
@@ -78,9 +81,8 @@ const EditUser = ({ history }) => {
                     <Input
                       controlId="formLastName"
                       error={errors.lastName && errors.lastName.message}
-                      showError={touched && touched.lastName}
-                      inputRef={register}
-                      name="lastName"
+                      showError={touchedFields && touchedFields.lastName}
+                      registeredEvents={register('lastName')}
                       isRequired={true}
                       label={lastNamePlaceholder}
                     />
@@ -99,8 +101,7 @@ const EditUser = ({ history }) => {
                     <Checkbox
                       controlId="isAdminCheckbox"
                       label={adminPlaceholder}
-                      inputRef={register}
-                      name="isAdmin"
+                      registeredEvents={register('isAdmin')}
                     />
                   </Col>
                 </Row>

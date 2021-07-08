@@ -15,6 +15,7 @@ const CustomCheckbox = ({
   isControlled,
   onClick,
   dataFor,
+  registeredEvents,
 }) => {
   return (
     <Form.Group controlId={controlId}>
@@ -42,8 +43,7 @@ const CustomCheckbox = ({
           shape="curve"
           variant="thick"
           disabled={disabled}
-          ref={inputRef}
-          name={name}
+          {...(registeredEvents || {})}
           data-tip={dataFor}
           data-for={dataFor}>
           {label}

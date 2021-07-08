@@ -23,7 +23,12 @@ const AddNewUser = () => {
 
   const [isLoading, setLoading] = useStateCallback(false);
 
-  const { register, handleSubmit, errors, formState, reset } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, touchedFields },
+    reset,
+  } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {
@@ -58,7 +63,6 @@ const AddNewUser = () => {
         .catch(() => setLoading(false));
     });
   };
-  const { touched } = formState;
 
   return (
     <Container>
@@ -73,9 +77,8 @@ const AddNewUser = () => {
                     <Input
                       controlId="formFirstName"
                       error={errors.firstName && errors.firstName.message}
-                      showError={touched && touched.firstName}
-                      inputRef={register}
-                      name="firstName"
+                      showError={touchedFields && touchedFields.firstName}
+                      registeredEvents={register('firstName')}
                       isRequired={true}
                       label={firstNamePlaceholder}
                     />
@@ -84,9 +87,8 @@ const AddNewUser = () => {
                     <Input
                       controlId="formLastName"
                       error={errors.lastName && errors.lastName.message}
-                      showError={touched && touched.lastName}
-                      inputRef={register}
-                      name="lastName"
+                      showError={touchedFields && touchedFields.lastName}
+                      registeredEvents={register('lastName')}
                       isRequired={true}
                       label={lastNamePlaceholder}
                     />
@@ -95,9 +97,8 @@ const AddNewUser = () => {
                     <Input
                       controlId="formEmail"
                       error={errors.email && errors.email.message}
-                      showError={touched && touched.email}
-                      inputRef={register}
-                      name="email"
+                      showError={touchedFields && touchedFields.email}
+                      registeredEvents={register('email')}
                       isRequired={true}
                       label={emailPlaceholder}
                     />
@@ -107,9 +108,8 @@ const AddNewUser = () => {
                       controlId="formPassword"
                       type="password"
                       error={errors.password && errors.password.message}
-                      showError={touched && touched.password}
-                      inputRef={register}
-                      name="password"
+                      showError={touchedFields && touchedFields.password}
+                      registeredEvents={register('password')}
                       isRequired={true}
                       label={passwordPlaceholder}
                     />
@@ -121,9 +121,8 @@ const AddNewUser = () => {
                       error={
                         errors.confirmPassword && errors.confirmPassword.message
                       }
-                      showError={touched && touched.confirmPassword}
-                      inputRef={register}
-                      name="confirmPassword"
+                      showError={touchedFields && touchedFields.confirmPassword}
+                      registeredEvents={register('confirmPassword')}
                       isRequired={true}
                       label={confirmPasswordPlaceholder}
                     />
@@ -132,8 +131,7 @@ const AddNewUser = () => {
                     <Checkbox
                       controlId="isAdminCheckbox"
                       label={adminPlaceholder}
-                      inputRef={register}
-                      name="isAdmin"
+                      registeredEvents={register('isAdmin')}
                     />
                   </Col>
                 </Row>

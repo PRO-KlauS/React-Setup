@@ -20,7 +20,11 @@ const ChangePasswordModal = ({
     footerButtons,
   } = constants.profile.changePasswordModal;
 
-  const { register, handleSubmit, errors, formState } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, touchedFields },
+  } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {
@@ -49,7 +53,6 @@ const ChangePasswordModal = ({
       variant: 'success',
     },
   ];
-  const { touched } = formState;
   return (
     <Modal
       title={title}
@@ -62,9 +65,8 @@ const ChangePasswordModal = ({
           controlId="formOldPassword"
           type="password"
           error={errors.oldPassword && errors.oldPassword.message}
-          showError={touched && touched.oldPassword}
-          inputRef={register}
-          name="oldPassword"
+          showError={touchedFields && touchedFields.oldPassword}
+          registeredEvents={register('oldPassword')}
           isRequired={true}
           label={oldPasswordPlaceholder}
         />
@@ -72,9 +74,8 @@ const ChangePasswordModal = ({
           controlId="formNewPassword"
           type="password"
           error={errors.newPassword && errors.newPassword.message}
-          showError={touched && touched.newPassword}
-          inputRef={register}
-          name="newPassword"
+          showError={touchedFields && touchedFields.newPassword}
+          registeredEvents={register('newPassword')}
           isRequired={true}
           label={newPasswordPlaceholder}
         />
@@ -82,9 +83,8 @@ const ChangePasswordModal = ({
           controlId="formConfirmPassword"
           type="password"
           error={errors.confirmPassword && errors.confirmPassword.message}
-          showError={touched && touched.confirmPassword}
-          inputRef={register}
-          name="confirmPassword"
+          showError={touchedFields && touchedFields.confirmPassword}
+          registeredEvents={register('confirmPassword')}
           isRequired={true}
           label={confirmPasswordPlaceholder}
         />

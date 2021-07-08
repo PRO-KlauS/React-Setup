@@ -31,7 +31,11 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const dispatch = useDispatch();
 
-  const { register, handleSubmit, errors, formState } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, touchedFields },
+  } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {
@@ -61,7 +65,6 @@ const Login = () => {
       //   .catch(() => setLoading(false));
     });
   };
-  const { touched } = formState;
 
   return (
     <div className="min-vh-100 d-flex justify-content-center align-items-center login-body">
@@ -77,9 +80,8 @@ const Login = () => {
               controlId="formEmail"
               placeholder={emailPlaceholder}
               error={errors.email && errors.email.message}
-              showError={touched && touched.email}
-              inputRef={register}
-              name="email"
+              showError={touchedFields && touchedFields.email}
+              registeredEvents={register('email')}
               iconClass="fas fa-envelope"
             />
             <Input
@@ -87,9 +89,8 @@ const Login = () => {
               type="password"
               placeholder={passwordPlaceholder}
               error={errors.password && errors.password.message}
-              showError={touched && touched.password}
-              inputRef={register}
-              name="password"
+              showError={touchedFields && touchedFields.password}
+              registeredEvents={register('password')}
               iconClass="fas fa-lock"
             />
             <div className="text-center">

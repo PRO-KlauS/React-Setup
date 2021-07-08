@@ -26,7 +26,8 @@ const Input = ({
   hasButton,
   buttonType,
   prependText,
-  hintText
+  hintText,
+  registeredEvents,
 }) => {
   return (
     <Form.Group
@@ -52,16 +53,13 @@ const Input = ({
             value={value}
           />
         ) : (
-            <Form.Control
-              name={name}
-              type={type}
-              placeholder={placeholder}
-              ref={inputRef}
-              disabled={disabled}
-              onChange={onChange}
-              onBlur={onBlur}
-            />
-          )}
+          <Form.Control
+            {...(registeredEvents || {})}
+            type={type}
+            placeholder={placeholder}
+            disabled={disabled}
+          />
+        )}
         {(buttonLabel || iconClass) && (
           <InputGroup.Append>
             {hasButton && (
