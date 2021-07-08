@@ -2,9 +2,7 @@ import React from 'react';
 import Routes from './routes';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import configureStore from './redux/store';
-
-const { persistor, store } = configureStore();
+import store, { persistor } from './redux/store';
 
 function App() {
   return (

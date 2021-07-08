@@ -1,14 +1,14 @@
-import { combineReducers } from "redux";
-import { LOGOUT, SET_USER_TOKEN } from "../actions/login";
-import loginReducer from "./login";
-import loaderReducer from "./loader";
-import profileReducer from "./profile";
-import sidebarReducer from "./sidebar";
-import usersReducer from "./users";
-import dashboardReducer from "./dashboard";
+import { combineReducers } from 'redux';
+import { LOGOUT, SET_USER_TOKEN } from '../actions/login';
+import loginReducer from './login';
+import loaderReducer from './loader';
+import profileReducer from './profile';
+import sidebarReducer from './sidebar';
+import usersReducer from './users';
+import dashboardReducer from './dashboard';
 
 const initialState = {
-  token: "",
+  token: '',
   loaderCount: 0,
   profile: {},
   sidebar: { isCollapsed: false, isVisible: false },
@@ -34,7 +34,7 @@ const rootReducer = (state, action) => {
   let newState = state;
   if (
     action.type === LOGOUT ||
-    (action.type !== SET_USER_TOKEN && !localStorage.getItem("TOKEN"))
+    (action.type !== SET_USER_TOKEN && !localStorage.getItem('TOKEN'))
   ) {
     newState = initialState;
   }
@@ -42,3 +42,4 @@ const rootReducer = (state, action) => {
 };
 
 export default rootReducer;
+export { initialState };

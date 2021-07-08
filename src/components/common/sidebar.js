@@ -27,9 +27,13 @@ const Sidebar = ({ location }) => {
       onToggle={toggleSidebar}>
       <SidebarHeader>
         {isCollapsed ? (
-          <img alt="Icon logo" src="/images/icon-logo.png" />
+          <img
+            alt="Icon logo"
+            className="small-logo"
+            src="/images/icon-logo.png"
+          />
         ) : (
-          <img alt="Logo" src="/images/white-logo.png" />
+          <img alt="Logo" className="brand-logo" src="/images/logo.png" />
         )}
         <i className="fas fa-times close-sidebar" onClick={closeSidebar} />
       </SidebarHeader>

@@ -19,7 +19,8 @@ const put = (url, body, headers = {}) => client.put(url, body, { headers });
 
 const patch = (url, body, headers = {}) => client.patch(url, body, { headers });
 
-const del = (url, body, headers = {}) => client.delete(url, body, { headers });
+const del = (url, body, headers = {}) =>
+  client.delete(url, { params: body, headers: headers });
 
 client.interceptors.request.use(async (config) => {
   config.headers.Authorization = await getToken();
