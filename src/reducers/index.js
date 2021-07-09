@@ -6,6 +6,7 @@ import profileReducer from './profile';
 import sidebarReducer from './sidebar';
 import usersReducer from './users';
 import dashboardReducer from './dashboard';
+import { removeToken } from '../utility/common';
 
 const initialState = {
   token: '',
@@ -37,6 +38,7 @@ const rootReducer = (state, action) => {
     (action.type !== SET_USER_TOKEN && !localStorage.getItem('TOKEN'))
   ) {
     newState = initialState;
+    removeToken();
   }
   return appReducer(newState, action);
 };
