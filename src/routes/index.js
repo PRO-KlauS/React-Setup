@@ -50,8 +50,8 @@ const Routes = () => {
   return (
     <Router>
       {/* <Suspense fallback={<FullScreenLoader />}> */}
-      <Switch>
-        <ScrollToTop>
+      <ScrollToTop>
+        <Switch>
           <Route
             exact
             path="/"
@@ -108,8 +108,8 @@ const Routes = () => {
             loaderCount={loaderCount}
             exact
           />
-        </ScrollToTop>
-      </Switch>
+        </Switch>
+      </ScrollToTop>
       {/* </Suspense> */}
       <Toaster
         position="bottom-right"
