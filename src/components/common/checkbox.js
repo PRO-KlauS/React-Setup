@@ -1,7 +1,6 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import { Checkbox } from 'pretty-checkbox-react';
-import 'pretty-checkbox/src/pretty-checkbox.scss';
 
 const CustomCheckbox = ({
   controlId,

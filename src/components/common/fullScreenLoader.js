@@ -1,6 +1,5 @@
 import React from 'react';
 import { Spinner } from 'react-bootstrap';
-import '../../styles/loader.scss';
 
 const FullScreenLoader = () => {
   return (

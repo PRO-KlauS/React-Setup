@@ -11,6 +11,7 @@ import { Toaster } from 'react-hot-toast';
 import { setReduxLoaderCount } from '../actions/loader';
 import UserRoute from './userRoute';
 import AdminRoute from './adminRoute';
+import UnAuthorizedRoute from './unAuthorizedRoute';
 import Login from '../pages/login';
 import AddNewUser from '../pages/addNewUser';
 import Profile from '../pages/profile';
@@ -23,6 +24,45 @@ import EditUser from '../pages/editUser';
 // const Dashboard = lazy(() => import("../pages/dashboard"));
 // const AddNewUser = lazy(() => import("../pages/addNewUser"));
 // const Profile = lazy(() => import("../pages/profile"));
+
+const routeMapper = [
+  {
+    path: '/login',
+    component: Login,
+    routeComponent: UnAuthorizedRoute,
+    exact: true,
+  },
+  {
+    path: '/dashboard',
+    component: Dashboard,
+    routeComponent: UserRoute,
+    exact: true,
+  },
+  {
+    path: '/profile',
+    component: Profile,
+    routeComponent: UserRoute,
+    exact: true,
+  },
+  {
+    path: '/add-new-user',
+    component: AddNewUser,
+    routeComponent: AdminRoute,
+    exact: true,
+  },
+  {
+    path: '/edit-user/:id',
+    component: EditUser,
+    routeComponent: AdminRoute,
+    exact: true,
+  },
+  {
+    path: '/manage-users',
+    component: ManageUsers,
+    routeComponent: AdminRoute,
+    exact: true,
+  },
+];
 
 const ScrollToTop = (props) => {
   const { pathname } = useLocation();
@@ -52,6 +92,7 @@ const Routes = () => {
       {/* <Suspense fallback={<FullScreenLoader />}> */}
       <ScrollToTop>
         <Switch>
+          {/* This is used to redirect the user as we don't have a "/" route */}
           <Route
             exact
             path="/"
@@ -59,55 +100,18 @@ const Routes = () => {
               <Redirect to={isAuthenticated ? '/dashboard' : '/login'} />
             )}
           />
-          <Route
-            exact
-            path="/login"
-            render={(props) =>
-              isAuthenticated ? (
-                <Redirect to="/dashboard" />
-              ) : (
-                <Login {...props} />
-              )
-            }
-          />
-          <UserRoute
-            isAuthenticated={isAuthenticated}
-            component={Dashboard}
-            path="/dashboard"
-            loaderCount={loaderCount}
-            exact
-          />
-          <UserRoute
-            isAuthenticated={isAuthenticated}
-            component={Profile}
-            path="/profile"
-            loaderCount={loaderCount}
-            exact
-          />
-          <AdminRoute
-            isAuthenticated={isAuthenticated}
-            component={AddNewUser}
-            isAdmin={isAdmin}
-            path="/add-new-user"
-            loaderCount={loaderCount}
-            exact
-          />
-          <AdminRoute
-            isAuthenticated={isAuthenticated}
-            component={EditUser}
-            isAdmin={isAdmin}
-            path="/edit-user/:id"
-            loaderCount={loaderCount}
-            exact
-          />
-          <AdminRoute
-            isAuthenticated={isAuthenticated}
-            component={ManageUsers}
-            isAdmin={isAdmin}
-            path="/manage-users"
-            loaderCount={loaderCount}
-            exact
-          />
+          {routeMapper.map(
+            ({ component, exact, path, routeComponent: RouteComponent }) => (
+              <RouteComponent
+                isAuthenticated={isAuthenticated}
+                component={component}
+                path={path}
+                isAdmin={isAdmin}
+                loaderCount={loaderCount}
+                exact={exact}
+              />
+            ),
+          )}
         </Switch>
       </ScrollToTop>
       {/* </Suspense> */}
@@ -122,3 +126,4 @@ const Routes = () => {
 };
 
 export default Routes;
+export { AdminRoute, UserRoute, UnAuthorizedRoute };

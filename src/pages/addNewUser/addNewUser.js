@@ -7,7 +7,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../schema/addNewUser';
 import { constants } from '../../constants';
 import { addNewUser } from '../../apis/manageUsers';
-import '../../styles/addUser.scss';
 
 const AddNewUser = () => {
   const {

@@ -8,10 +8,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../schema/login';
 import { setUserToken } from '../../actions/login';
 import { constants, messages } from '../../constants';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../styles/common/form.scss';
-import '../../styles/common/button.scss';
-import '../../styles/login.scss';
 
 const Login = () => {
   useEffect(() => {
@@ -20,12 +16,8 @@ const Login = () => {
       showToast(messages.sessionExpired);
     }
   }, []);
-  const {
-    title,
-    buttons,
-    emailPlaceholder,
-    passwordPlaceholder,
-  } = constants.loginPage;
+  const { title, buttons, emailPlaceholder, passwordPlaceholder } =
+    constants.loginPage;
 
   const [isLoading, setLoading] = useStateCallback(false);
   const [errorMessage, setErrorMessage] = useState('');

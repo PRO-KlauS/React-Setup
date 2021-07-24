@@ -7,7 +7,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../schema/editUser';
 import { constants } from '../../constants';
 import { editUser } from '../../apis/manageUsers';
-import '../../styles/editUser.scss';
 
 const EditUser = ({ history }) => {
   const {

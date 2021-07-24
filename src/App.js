@@ -3,6 +3,11 @@ import Routes from './routes';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import store, { persistor } from './redux/store';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'pretty-checkbox/src/pretty-checkbox.scss';
+import 'react-pro-sidebar/dist/css/styles.css';
+import './styles/index.scss';
 
 function App() {
   return (

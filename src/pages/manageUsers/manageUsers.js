@@ -5,7 +5,6 @@ import { Table, Input, Button } from '../../components';
 import { getUsers } from '../../actions/manageUsers';
 import { showToast, useStateCallback } from '../../utility/common';
 import { constants } from '../../constants';
-import '../../styles/manageUsers.scss';
 
 const ManageUsers = ({ history }) => {
   const dispatch = useDispatch();
@@ -16,8 +15,8 @@ const ManageUsers = ({ history }) => {
 
   useEffect(() => {
     dispatch(getUsers({ search: '', page: 1, is_active: true })).then((res) => {
-      if (!res.status) {
-        showToast(res.error_message);
+      if (!res?.status) {
+        showToast(res?.error_message);
       }
     });
   }, []);

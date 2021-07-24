@@ -1,8 +1,5 @@
-import React from "react";
-import { Sidebar, Header, Footer, FullScreenLoader } from "../index";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../../styles/common/index.scss";
-import "../../styles/appStyle.scss";
+import React from 'react';
+import { Sidebar, Header, Footer, FullScreenLoader } from '../index';
 
 const AdminLayout = (props) => {
   const { loaderCount, component: Component, ...rest } = props;

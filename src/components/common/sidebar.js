@@ -1,12 +1,16 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { ProSidebar, Menu, MenuItem, SidebarHeader } from 'react-pro-sidebar';
+import {
+  ProSidebar,
+  Menu,
+  MenuItem,
+  SidebarHeader,
+  SubMenu,
+} from 'react-pro-sidebar';
 import { setSidebarVisibility } from '../../actions/sidebar';
 import { getSidebarMenuClasses } from '../../utility/common';
 import { constants } from '../../constants';
-import 'react-pro-sidebar/dist/css/styles.css';
-import '../../styles/sidebar.scss';
 
 const Sidebar = ({ location }) => {
   const dispatch = useDispatch();
@@ -45,7 +49,7 @@ const Sidebar = ({ location }) => {
             {dashboardPlaceholder}
           </NavLink>
         </MenuItem>
-        {profile.is_admin ? (
+        {profile.is_admin && (
           <MenuItem
             className={sidebarMenuClasses.manageUsers}
             icon={<i className="fa fa-user-plus" />}>
@@ -53,9 +57,18 @@ const Sidebar = ({ location }) => {
               {manageUsersPlaceholder}
             </NavLink>
           </MenuItem>
-        ) : (
-          <></>
         )}
+        <SubMenu
+          title="Submenu Example"
+          icon={<i className="fa fa-user-plus" />}>
+          <MenuItem>Route 1</MenuItem>
+          <SubMenu
+            title="Submenu Route 1"
+            icon={<i className="fa fa-user-plus" />}>
+            <MenuItem>Route 2</MenuItem>
+            <MenuItem>Route 3</MenuItem>
+          </SubMenu>
+        </SubMenu>
       </Menu>
     </ProSidebar>
   );

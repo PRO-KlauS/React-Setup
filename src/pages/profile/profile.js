@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../schema/profile';
 import { constants } from '../../constants';
-import '../../styles/profile.scss';
 
 const Profile = () => {
   const {

@@ -1,13 +1,12 @@
-@import "./variables.scss";
-@import "./form.scss";
+@import "./appStyle.scss";
 @import "./button.scss";
+@import "./footer.scss";
+@import "./form.scss";
+@import "./header.scss";
+@import "./loader.scss";
 @import "./modal.scss";
-@import "./table.scss";
 @import "./pagination.scss";
-
-body{
-  letter-spacing:.25px;
-  @include regular-font;
-  color:$black
-}
-  
+@import "./sidebar.scss";
+@import "./slickslider-custom.scss";
+@import "./table.scss";
+@import "./variables.scss";

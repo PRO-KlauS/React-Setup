@@ -9,7 +9,6 @@ import {
   setSidebarVisibility,
 } from '../../actions/sidebar';
 import { getHeaderTitle, showToast } from '../../utility/common';
-import '../../styles/header.scss';
 
 const Header = ({ location }) => {
   const dispatch = useDispatch();

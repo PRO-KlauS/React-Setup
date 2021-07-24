@@ -15,7 +15,6 @@ import { showToast, useStateCallback } from '../../utility/common';
 import { Container, Row, Card, Tabs, Tab, Form } from 'react-bootstrap';
 import { constants } from '../../constants';
 import { sortingMethodIconMapper } from '../../utility/mapper';
-import '../../styles/dashboard.scss';
 
 const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
   const dispatch = useDispatch();
