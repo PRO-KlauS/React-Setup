@@ -12,7 +12,7 @@ import FullScreenLoader from './common/fullScreenLoader';
 import Table from './common/table';
 import UserLayout from './common/userLayout';
 import AdminLayout from './common/adminLayout';
-import UnAuthorizedRouteLayout from './common/unAuthorizedRouteLayout';
+import PublicRouteLayout from './common/publicRouteLayout';
 import CompanyTable from './common/companyTable';
 import Pagination from './common/pagination';
 import Slider from './common/slider';
@@ -36,7 +36,7 @@ export {
   Table,
   UserLayout,
   AdminLayout,
-  UnAuthorizedRouteLayout,
+  PublicRouteLayout,
   CompanyTable,
   Pagination,
   Slider,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FullScreenLoader } from '../index';
 
-const UnAuthorizedRouteLayout = (props) => {
+const PublicRouteLayout = (props) => {
   const { loaderCount, component: Component, ...rest } = props;
   return (
     <>
@@ -10,4 +10,4 @@ const UnAuthorizedRouteLayout = (props) => {
     </>
   );
 };
-export default UnAuthorizedRouteLayout;
+export default PublicRouteLayout;

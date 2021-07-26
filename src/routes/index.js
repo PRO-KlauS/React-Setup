@@ -11,7 +11,7 @@ import { Toaster } from 'react-hot-toast';
 import { setReduxLoaderCount } from '../actions/loader';
 import UserRoute from './userRoute';
 import AdminRoute from './adminRoute';
-import UnAuthorizedRoute from './unAuthorizedRoute';
+import PublicRoute from './publicRoute';
 import Login from '../pages/login';
 import AddNewUser from '../pages/addNewUser';
 import Profile from '../pages/profile';
@@ -29,7 +29,7 @@ const routeMapper = [
   {
     path: '/login',
     component: Login,
-    routeComponent: UnAuthorizedRoute,
+    routeComponent: PublicRoute,
     exact: true,
   },
   {
@@ -126,4 +126,3 @@ const Routes = () => {
 };
 
 export default Routes;
-export { AdminRoute, UserRoute, UnAuthorizedRoute };

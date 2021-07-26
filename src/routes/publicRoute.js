@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { UnAuthorizedRouteLayout } from '../components';
+import { PublicRouteLayout } from '../components';
 
-const UnAuthorizedRoute = ({
+const PublicRoute = ({
   component: Component,
   loaderCount,
   isAuthenticated,
@@ -20,7 +20,7 @@ const UnAuthorizedRoute = ({
             }}
           />
         ) : (
-          <UnAuthorizedRouteLayout
+          <PublicRouteLayout
             component={Component}
             loaderCount={loaderCount}
             {...props}
@@ -30,4 +30,4 @@ const UnAuthorizedRoute = ({
     />
   );
 };
-export default UnAuthorizedRoute;
+export default PublicRoute;
