@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { Pagination } from '../index';
-import { messages } from '../../constants';
 
 const CustomTable = ({
   tableClass,
@@ -14,6 +14,7 @@ const CustomTable = ({
   totalItemsCount,
   pageTextHidden,
 }) => {
+  const { t } = useTranslation();
   return (
     <div>
       <div className="table-parent">
@@ -41,7 +42,9 @@ const CustomTable = ({
           <tbody>
             {children || (
               <tr className="no-data-msg">
-                <td colSpan={headers && headers.length}>{messages.noData}</td>
+                <td colSpan={headers && headers.length}>
+                  {t('messages.noData')}
+                </td>
               </tr>
             )}
           </tbody>

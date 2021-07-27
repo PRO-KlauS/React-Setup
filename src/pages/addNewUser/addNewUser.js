@@ -3,23 +3,13 @@ import { Container, Row, Col, Card, Form } from 'react-bootstrap';
 import { Input, Checkbox, Button } from '../../components';
 import { showToast, useStateCallback } from '../../utility/common';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../schema/addNewUser';
-import { constants } from '../../constants';
 import { addNewUser } from '../../apis/manageUsers';
 
 const AddNewUser = () => {
-  const {
-    title,
-    buttons,
-    emailPlaceholder,
-    passwordPlaceholder,
-    adminPlaceholder,
-    confirmPasswordPlaceholder,
-    firstNamePlaceholder,
-    lastNamePlaceholder,
-  } = constants.addNewUser;
-
+  const { t } = useTranslation();
   const [isLoading, setLoading] = useStateCallback(false);
 
   const {
@@ -69,7 +59,7 @@ const AddNewUser = () => {
         <Col lg={12} xl={10} className="offset-lg-0 offset-xl-1">
           <Card>
             <Card.Body className="pad-1">
-              <Card.Title>{title}</Card.Title>
+              <Card.Title>{t('addNewUser.title')}</Card.Title>
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <Row>
                   <Col md={6}>
@@ -79,7 +69,7 @@ const AddNewUser = () => {
                       showError={touchedFields && touchedFields.firstName}
                       registeredEvents={register('firstName')}
                       isRequired={true}
-                      label={firstNamePlaceholder}
+                      label={t('addNewUser.firstNamePlaceholder')}
                     />
                   </Col>
                   <Col md={6}>
@@ -89,7 +79,7 @@ const AddNewUser = () => {
                       showError={touchedFields && touchedFields.lastName}
                       registeredEvents={register('lastName')}
                       isRequired={true}
-                      label={lastNamePlaceholder}
+                      label={t('addNewUser.lastNamePlaceholder')}
                     />
                   </Col>
                   <Col md={6}>
@@ -99,7 +89,7 @@ const AddNewUser = () => {
                       showError={touchedFields && touchedFields.email}
                       registeredEvents={register('email')}
                       isRequired={true}
-                      label={emailPlaceholder}
+                      label={t('addNewUser.emailPlaceholder')}
                     />
                   </Col>
                   <Col md={6}>
@@ -110,7 +100,7 @@ const AddNewUser = () => {
                       showError={touchedFields && touchedFields.password}
                       registeredEvents={register('password')}
                       isRequired={true}
-                      label={passwordPlaceholder}
+                      label={t('addNewUser.passwordPlaceholder')}
                     />
                   </Col>
                   <Col md={6}>
@@ -123,13 +113,13 @@ const AddNewUser = () => {
                       showError={touchedFields && touchedFields.confirmPassword}
                       registeredEvents={register('confirmPassword')}
                       isRequired={true}
-                      label={confirmPasswordPlaceholder}
+                      label={t('addNewUser.confirmPasswordPlaceholder')}
                     />
                   </Col>
                   <Col md={6} className="inline-checkbox">
                     <Checkbox
                       controlId="isAdminCheckbox"
-                      label={adminPlaceholder}
+                      label={t('addNewUser.adminPlaceholder')}
                       registeredEvents={register('isAdmin')}
                     />
                   </Col>
@@ -139,7 +129,7 @@ const AddNewUser = () => {
                     variant="success"
                     disabled={isLoading}
                     isLoading={isLoading}
-                    label={buttons.addUser}
+                    label={t('addNewUser.buttons.addUser')}
                     onClick={handleSubmit(onSubmit)}
                   />
                 </Card.Footer>

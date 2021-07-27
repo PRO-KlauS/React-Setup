@@ -1,8 +1,9 @@
 import React from 'react';
 import { Col, Card } from 'react-bootstrap';
-import { messages } from '../../constants';
+import { useTranslation } from 'react-i18next';
 
 const DataCard = ({ data, companyType }) => {
+  const { t } = useTranslation();
   return (
     <Col md={6} xl={4} className="details-info">
       <Card>
@@ -31,7 +32,9 @@ const DataCard = ({ data, companyType }) => {
               <p>{companyType.value}</p>
             </div>
           )}
-          {data.length === 0 && !companyType.value && <p>{messages.noData}</p>}
+          {data.length === 0 && !companyType.value && (
+            <p>{t('messages.noData')}</p>
+          )}
         </Card.Body>
       </Card>
     </Col>

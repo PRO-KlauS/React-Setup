@@ -6,6 +6,7 @@ import Checkbox from './common/checkbox';
 import Button from './common/button';
 import DetailCard from './common/detailCard';
 import HeaderDropdown from './header/headerDropdown';
+import LanguageDropdown from './header/languageDropdown';
 import Modal from './common/modal';
 import ChangePasswordModal from './profile/changePasswordModal';
 import FullScreenLoader from './common/fullScreenLoader';
@@ -30,6 +31,7 @@ export {
   Button,
   DetailCard,
   HeaderDropdown,
+  LanguageDropdown,
   Modal,
   ChangePasswordModal,
   FullScreenLoader,

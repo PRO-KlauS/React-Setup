@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactPagination from 'react-js-pagination';
-import { constants } from '../../constants';
+import { useTranslation } from 'react-i18next';
 
 const Pagination = ({
   page,
@@ -11,13 +11,13 @@ const Pagination = ({
   color,
   pageTextHidden,
 }) => {
-  const { ofPlaceholder, pagePlaceholder } = constants.pagination;
+  const { t } = useTranslation();
   return (
     <div className={`pagination-row ${color}`}>
       {!pageTextHidden && (
         <p className="counter">
-          {pagePlaceholder} <span>{page}</span> {ofPlaceholder}{' '}
-          <span>{totalPages}</span> {pageText}
+          {t('pagination.pagePlaceholder')} <span>{page}</span>{' '}
+          {t('pagination.ofPlaceholder')} <span>{totalPages}</span> {pageText}
         </p>
       )}
       <ReactPagination

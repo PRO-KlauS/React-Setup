@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Card, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { Table, Input, Button } from '../../components';
 import { getUsers } from '../../actions/manageUsers';
 import { showToast, useStateCallback } from '../../utility/common';
-import { constants } from '../../constants';
 
 const ManageUsers = ({ history }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { users, profile } = useSelector((state) => ({
     users: state.users,
     profile: state.profile,
@@ -60,24 +61,16 @@ const ManageUsers = ({ history }) => {
     history.push('/add-new-user');
   };
   const { items, totalItemCount, totalPages } = users;
-  const {
-    adminPlaceholder,
-    buttons,
-    headers,
-    pageText,
-    searchText,
-    title,
-    userPlaceholder,
-  } = constants.manageUsers;
+
   return (
     <Container className="manage-users">
       <Card>
         <Card.Body className="pad-2">
           <Card.Title>
-            <span>{title}</span>
+            <span>{t('manageUsers.title')}</span>
             <div className="inline-heading-form">
               <Button
-                label={buttons.add}
+                label={t('manageUsers.buttons.add')}
                 onClick={onAddUser}
                 className="add-btn left"
                 prependIcon={true}
@@ -86,7 +79,7 @@ const ManageUsers = ({ history }) => {
               <Form>
                 <Input
                   controlId="findUsers"
-                  placeholder={searchText}
+                  placeholder={t('manageUsers.searchText')}
                   name="dataPoint"
                   isControlled={true}
                   value={searchValue}
@@ -104,10 +97,10 @@ const ManageUsers = ({ history }) => {
           </Card.Title>
           <Table
             activePage={page}
-            countText={pageText}
+            countText={t('manageUsers.pageText')}
             pageCount={totalPages}
             totalItemsCount={totalItemCount}
-            headers={headers}
+            headers={t('manageUsers.headers', { returnObjects: true })}
             onPageChange={onPageChange}>
             {items &&
               items.length > 0 &&
@@ -123,7 +116,9 @@ const ManageUsers = ({ history }) => {
                     </td>
                     <td>
                       <i className="fas fa-user" />
-                      {item.is_admin ? adminPlaceholder : userPlaceholder}
+                      {item.is_admin
+                        ? t('manageUsers.adminPlaceholder')
+                        : t('manageUsers.userPlaceholder')}
                     </td>
                     <td>
                       {profile && profile.id !== item.id && (

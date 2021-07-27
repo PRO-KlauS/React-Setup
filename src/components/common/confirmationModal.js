@@ -1,6 +1,6 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Modal } from '../index';
-import { constants } from '../../constants';
 
 const ConfirmationModal = ({
   isModalVisible,
@@ -10,11 +10,11 @@ const ConfirmationModal = ({
   message,
   isLoading,
 }) => {
-  const { footerButtons } = constants.confirmationModal;
+  const { t } = useTranslation();
 
   const modalFooterButtons = [
     {
-      label: footerButtons.cancel,
+      label: t('confirmationModal.footerButtons.cancel'),
       className: 'cancel-btn',
       isLoading: false,
       isDisabled: false,
@@ -22,7 +22,7 @@ const ConfirmationModal = ({
       variant: 'secondary',
     },
     {
-      label: footerButtons.delete,
+      label: t('confirmationModal.footerButtons.delete'),
       className: 'delete-btn',
       isLoading: isLoading,
       isDisabled: isLoading,

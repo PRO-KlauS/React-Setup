@@ -13,11 +13,12 @@ import {
 import { setDashboardData } from '../../actions/dashboard';
 import { showToast, useStateCallback } from '../../utility/common';
 import { Container, Row, Card, Tabs, Tab, Form } from 'react-bootstrap';
-import { constants } from '../../constants';
+import { useTranslation } from 'react-i18next';
 import { sortingMethodIconMapper } from '../../utility/mapper';
 
 const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { dashboardDetails, profile } = useSelector((state) => ({
     dashboardDetails: state.dashboardDetails,
     profile: state.profile,
@@ -250,25 +251,16 @@ const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
     });
   };
 
-  const {
-    companiesTitle,
-    newEntityTitle,
-    searchPlaceholder,
-    suspendedEntityTitle,
-    tabTitles,
-    cardLabels,
-    buttons,
-    pageText,
-    newEntityHeaders,
-    dropdownOptions,
-  } = constants.dashboard;
+  let newEntityHeaders = t('dashboard.newEntityHeaders', {
+    returnObjects: true,
+  });
+  let dropdownOptions = t('dashboard.dropdownOptions', { returnObjects: true });
   newEntityHeaders[1] = {
     ...newEntityHeaders[1],
     className: sortMethod === 'both' ? '' : 'active',
     onHeaderClick: onHeaderClick,
     icons: [{ className: sortingMethodIconMapper[sortMethod] }],
   };
-  const { addCompanyTooltip, removeCompanyTooltip } = constants.tooltips;
   const { entities, urls, datapoints, newEntities } = dashboardDetails;
 
   return (
@@ -276,25 +268,25 @@ const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
       <Row className="small-data-card-info">
         <DetailCard
           value={entities}
-          label={cardLabels[0]}
+          label={t('dashboard.cardLabels.0')}
           colorClass="pink"
           imagePath="/images/company.svg"
         />
         <DetailCard
           value={newEntities}
-          label={cardLabels[3]}
+          label={t('dashboard.cardLabels.3')}
           colorClass="sky-blue"
           imagePath="/images/office-building.svg"
         />
         <DetailCard
           value={urls}
-          label={cardLabels[1]}
+          label={t('dashboard.cardLabels.1')}
           colorClass="light-orange"
           imagePath="/images/web-url.svg"
         />
         <DetailCard
           value={datapoints}
-          label={cardLabels[2]}
+          label={t('dashboard.cardLabels.2')}
           colorClass="dark-cyan"
           imagePath="/images/data-points.svg"
         />
@@ -306,11 +298,11 @@ const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
         activeKey={activeTab}
         mountOnEnter={true}
         className="no-bdr">
-        <Tab eventKey="companies" title={tabTitles[0]}>
+        <Tab eventKey="companies" title={t('dashboard.tabTitles.0')}>
           <Card className="no-top-radius companies">
             <Card.Body className="pad-2">
               <Card.Title>
-                <span>{companiesTitle}</span>
+                <span>{t('dashboard.companiesTitle')}</span>
                 <div className="inline-heading-form">
                   <Dropdown
                     id="filter-dropdown"
@@ -321,7 +313,7 @@ const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
                   <Form>
                     <Input
                       controlId="searchInput"
-                      placeholder={searchPlaceholder}
+                      placeholder={t('dashboard.searchPlaceholder')}
                       isLoading={isButtonLoading}
                       isControlled={true}
                       value={searchValue}
@@ -367,22 +359,22 @@ const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
             />
             <Button
               variant="success"
-              label={buttons.update}
+              label={t('dashboard.buttons.update')}
               onClick={onUpdateCompanies}
               isLoading={isUpdateBtnLoading}
             />
           </div>
         </Tab>
-        <Tab eventKey="new-entities" title={tabTitles[1]}>
+        <Tab eventKey="new-entities" title={t('dashboard.tabTitles.1')}>
           <Card className="no-top-radius new-entities">
             <Card.Body className="pad-2">
               <Card.Title>
-                <span>{newEntityTitle}</span>
+                <span>{t('dashboard.newEntityTitle')}</span>
                 <Form>
                   <div className="inline-heading-form">
                     <Input
                       controlId="searchInput"
-                      placeholder={searchPlaceholder}
+                      placeholder={t('dashboard.searchPlaceholder')}
                       isLoading={isButtonLoading}
                       isControlled={true}
                       value={searchValue}
@@ -399,7 +391,7 @@ const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
               </Card.Title>
               <Table
                 activePage={page}
-                countText={pageText}
+                countText={t('dashboard.pageText')}
                 pageCount={totalPages}
                 totalItemsCount={totalItemCount}
                 headers={newEntityHeaders}
@@ -432,10 +424,10 @@ const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
                             <ToolTip
                               id={'remove-company' + item.id}
                               place="left">
-                              {removeCompanyTooltip}
+                              {t('tooltips.removeCompanyTooltip')}
                             </ToolTip>
                             <ToolTip id={'add-company' + item.id} place="left">
-                              {addCompanyTooltip}
+                              {t('tooltips.addCompanyTooltip')}
                             </ToolTip>
                           </div>
                         </td>
@@ -446,11 +438,11 @@ const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
             </Card.Body>
           </Card>
         </Tab>
-        <Tab eventKey="suspended-entities" title={tabTitles[2]}>
+        <Tab eventKey="suspended-entities" title={t('dashboard.tabTitles.2')}>
           <Card className="no-top-radius suspended-entities">
             <Card.Body className="pad-2">
               <Card.Title>
-                <span>{suspendedEntityTitle}</span>
+                <span>{t('dashboard.suspendedEntityTitle')}</span>
                 <div className="inline-heading-form">
                   <Dropdown
                     id="filter-dropdown"
@@ -461,7 +453,7 @@ const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
                   <Form>
                     <Input
                       controlId="searchInput"
-                      placeholder={searchPlaceholder}
+                      placeholder={t('dashboard.searchPlaceholder')}
                       isLoading={isButtonLoading}
                       isControlled={true}
                       value={searchValue}

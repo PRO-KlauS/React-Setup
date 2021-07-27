@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { messages } from '../constants';
+import i18nInstance from '../internationalization/intlSetup';
 import { getToken, getBaseURL, showToast } from '../utility/common';
 
 const client = axios.create({
@@ -24,6 +24,10 @@ const del = (url, body, headers = {}) =>
 
 client.interceptors.request.use(async (config) => {
   config.headers.Authorization = await getToken();
+  // config.params = {
+  //   ...(config.params || {}),
+  //   locale: i18nInstance.language || "en",
+  // };
   return config;
 });
 
@@ -36,7 +40,7 @@ client.interceptors.response.use(
     return response;
   },
   function (error) {
-    showToast(messages.tryAgain);
+    showToast(i18nInstance.t('messages.tryAgain'));
     return Promise.reject(error);
   },
 );

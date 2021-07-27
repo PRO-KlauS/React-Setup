@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Container, Alert } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { Input, Button } from '../../components';
 import { showToast, useStateCallback } from '../../utility/common';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../schema/login';
 import { setUserToken } from '../../actions/login';
-import { constants, messages } from '../../constants';
 
 const Login = () => {
   useEffect(() => {
     if (localStorage.getItem('SHOW_TOAST')) {
       localStorage.removeItem('SHOW_TOAST');
-      showToast(messages.sessionExpired);
+      showToast(t('messages.sessionExpired'));
     }
   }, []);
-  const { title, buttons, emailPlaceholder, passwordPlaceholder } =
-    constants.loginPage;
+  const { t } = useTranslation();
 
   const [isLoading, setLoading] = useStateCallback(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -64,13 +63,13 @@ const Login = () => {
         <div className="login-box">
           <div className="text-center">
             <img src="/images/logo.png" alt="Logo" className="logo" />
-            <h1 className="heading">{title}</h1>
+            <h1 className="heading">{t('loginPage.title')}</h1>
             {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
           </div>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Input
               controlId="formEmail"
-              placeholder={emailPlaceholder}
+              placeholder={t('loginPage.emailPlaceholder')}
               error={errors.email && errors.email.message}
               showError={touchedFields && touchedFields.email}
               registeredEvents={register('email')}
@@ -79,7 +78,7 @@ const Login = () => {
             <Input
               controlId="formPassword"
               type="password"
-              placeholder={passwordPlaceholder}
+              placeholder={t('loginPage.passwordPlaceholder')}
               error={errors.password && errors.password.message}
               showError={touchedFields && touchedFields.password}
               registeredEvents={register('password')}
@@ -89,7 +88,7 @@ const Login = () => {
               <Button
                 disabled={isLoading}
                 isLoading={isLoading}
-                label={buttons.login}
+                label={t('loginPage.buttons.login')}
                 onClick={handleSubmit(onSubmit)}
                 type="submit"
               />

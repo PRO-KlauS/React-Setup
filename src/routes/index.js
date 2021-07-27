@@ -81,12 +81,12 @@ const Routes = () => {
     loaderCount: state.loaderCount,
     profile: state.profile,
   }));
-  let isAuthenticated = token;
-  let isAdmin = profile && profile.is_admin;
   const dispatch = useDispatch();
   useEffect(() => {
     loaderCount > 0 && dispatch(setReduxLoaderCount(0));
   }, []);
+  let isAuthenticated = !token;
+  let isAdmin = profile && profile.is_admin;
   return (
     <Router>
       {/* <Suspense fallback={<FullScreenLoader />}> */}

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { constants } from '../../constants';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 const HeaderDropdown = ({ profile, logout }) => {
-  const { profilePlaceholder, logOutPlaceholder } = constants.header;
+  const { t } = useTranslation();
   const history = useHistory();
   const navigateToProfilePage = () => history.push('/profile');
   return (
@@ -21,11 +21,11 @@ const HeaderDropdown = ({ profile, logout }) => {
       <Dropdown.Menu align={'right'}>
         <Dropdown.Item onClick={navigateToProfilePage}>
           <i className="fas fa-user-cog" />
-          {profilePlaceholder}
+          {t('header.profilePlaceholder')}
         </Dropdown.Item>
         <Dropdown.Item onClick={logout}>
           <i className="fas fa-sign-in-alt fa-rotate-180" />
-          {logOutPlaceholder}
+          {t('header.logOutPlaceholder')}
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>

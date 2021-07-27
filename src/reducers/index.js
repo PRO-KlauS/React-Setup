@@ -6,6 +6,7 @@ import profileReducer from './profile';
 import sidebarReducer from './sidebar';
 import usersReducer from './users';
 import dashboardReducer from './dashboard';
+import languageReducer from './internationalization';
 import { removeToken } from '../utility/common';
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
     datapoints: 0,
     newEntities: 0,
   },
+  language: 'en',
 };
 
 const appReducer = combineReducers({
@@ -29,6 +31,7 @@ const appReducer = combineReducers({
   sidebar: sidebarReducer,
   users: usersReducer,
   dashboardDetails: dashboardReducer,
+  language: languageReducer,
 });
 
 const rootReducer = (state, action) => {

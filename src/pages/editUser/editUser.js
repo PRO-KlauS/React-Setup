@@ -4,20 +4,12 @@ import { Input, Checkbox, Button } from '../../components';
 import { showToast, useStateCallback } from '../../utility/common';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useTranslation } from 'react-i18next';
 import schema from '../../schema/editUser';
-import { constants } from '../../constants';
 import { editUser } from '../../apis/manageUsers';
 
 const EditUser = ({ history }) => {
-  const {
-    title,
-    buttons,
-    emailPlaceholder,
-    adminPlaceholder,
-    firstNamePlaceholder,
-    lastNamePlaceholder,
-  } = constants.editUser;
-
+  const { t } = useTranslation();
   const [isLoading, setLoading] = useStateCallback(false);
 
   const { first_name, last_name, email, id, is_admin } =
@@ -63,7 +55,7 @@ const EditUser = ({ history }) => {
         <Col lg={12} xl={10} className="offset-lg-0 offset-xl-1">
           <Card>
             <Card.Body className="pad-1">
-              <Card.Title>{title}</Card.Title>
+              <Card.Title>{t('editUser.title')}</Card.Title>
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <Row>
                   <Col md={6}>
@@ -73,7 +65,7 @@ const EditUser = ({ history }) => {
                       showError={touchedFields && touchedFields.firstName}
                       registeredEvents={register('firstName')}
                       isRequired={true}
-                      label={firstNamePlaceholder}
+                      label={t('editUser.firstNamePlaceholder')}
                     />
                   </Col>
                   <Col md={6}>
@@ -83,14 +75,14 @@ const EditUser = ({ history }) => {
                       showError={touchedFields && touchedFields.lastName}
                       registeredEvents={register('lastName')}
                       isRequired={true}
-                      label={lastNamePlaceholder}
+                      label={t('editUser.lastNamePlaceholder')}
                     />
                   </Col>
                   <Col md={6}>
                     <Input
                       controlId="formEmail"
                       name="email"
-                      label={emailPlaceholder}
+                      label={t('editUser.emailPlaceholder')}
                       isControlled={true}
                       value={email}
                       disabled={true}
@@ -99,7 +91,7 @@ const EditUser = ({ history }) => {
                   <Col md={6} className="inline-checkbox">
                     <Checkbox
                       controlId="isAdminCheckbox"
-                      label={adminPlaceholder}
+                      label={t('editUser.adminPlaceholder')}
                       registeredEvents={register('isAdmin')}
                     />
                   </Col>
@@ -109,7 +101,7 @@ const EditUser = ({ history }) => {
                     variant="success"
                     disabled={isLoading}
                     isLoading={isLoading}
-                    label={buttons.editUser}
+                    label={t('editUser.buttons.editUser')}
                     onClick={handleSubmit(onSubmit)}
                   />
                 </Card.Footer>

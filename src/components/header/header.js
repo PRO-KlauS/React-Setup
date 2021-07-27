@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navbar, Container } from 'react-bootstrap';
-import { HeaderDropdown } from '../index';
+import { HeaderDropdown, LanguageDropdown } from '../index';
 import { logout } from '../../actions/login';
 import { setProfileData } from '../../actions/profile';
 import {
@@ -12,11 +12,14 @@ import { getHeaderTitle, showToast } from '../../utility/common';
 
 const Header = ({ location }) => {
   const dispatch = useDispatch();
-  const { profile, isCollapsed, isVisible } = useSelector((state) => ({
-    isCollapsed: state.sidebar.isCollapsed,
-    isVisible: state.sidebar.isVisible,
-    profile: state.profile,
-  }));
+  const { profile, isCollapsed, isVisible, language } = useSelector(
+    (state) => ({
+      isCollapsed: state.sidebar.isCollapsed,
+      isVisible: state.sidebar.isVisible,
+      profile: state.profile,
+      language: state.language,
+    }),
+  );
   useEffect(() => {
     dispatch(setProfileData()).then((res) => {
       if (!res.status) showToast(res.error_message);
@@ -41,6 +44,7 @@ const Header = ({ location }) => {
           <h1>{headerTitle}</h1>
         </div>
         <div className="navigation-items">
+          <LanguageDropdown dispatch={dispatch} language={language} />
           <HeaderDropdown profile={profile} logout={logoutAction} />
           <i
             className="fas fa-bars collapse-sidebar-btn"

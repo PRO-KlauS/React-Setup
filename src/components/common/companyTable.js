@@ -1,8 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Table, Checkbox, Button, ToolTip } from '../index';
 import { formatDate } from '../../utility/common';
 import { sortingMethodIconMapper } from '../../utility/mapper';
-import { constants } from '../../constants';
 
 const CompanyTable = ({
   page,
@@ -22,10 +22,10 @@ const CompanyTable = ({
   sortMethod,
   onHeaderClick,
 }) => {
-  const { selectAllCompaniesTooltip } = constants.tooltips;
+  const { t } = useTranslation();
   const navigateToCompanyPage = (company) =>
     history.push(`/company-details/${company.id}`, company);
-  const { pageText, buttons, headers } = constants.companyTable;
+  let headers = t('companyTable.headers', { returnObjects: true });
   headers[1] = {
     ...headers[1],
     className: sortMethod === 'both' ? 'sorting' : 'active sorting',
@@ -47,11 +47,13 @@ const CompanyTable = ({
               />
               <Button
                 variant="success"
-                label={buttons.update}
+                label={t('companyTable.buttons.update')}
                 onClick={onUpdate}
                 isLoading={isUpdateBtnLoading}
               />
-              <ToolTip id="select-all">{selectAllCompaniesTooltip}</ToolTip>
+              <ToolTip id="select-all">
+                {t('tooltips.selectAllCompaniesTooltip')}
+              </ToolTip>
             </>
           ),
         },
@@ -60,7 +62,7 @@ const CompanyTable = ({
   return (
     <Table
       activePage={page}
-      countText={pageText}
+      countText={t('companyTable.pageText')}
       pageCount={pageCount}
       totalItemsCount={totalItemsCount}
       headers={tableHeaders}

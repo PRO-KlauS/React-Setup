@@ -8,12 +8,13 @@ import {
   SidebarHeader,
   SubMenu,
 } from 'react-pro-sidebar';
+import { useTranslation } from 'react-i18next';
 import { setSidebarVisibility } from '../../actions/sidebar';
 import { getSidebarMenuClasses } from '../../utility/common';
-import { constants } from '../../constants';
 
 const Sidebar = ({ location }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { profile, isCollapsed, isVisible } = useSelector((state) => ({
     isCollapsed: state.sidebar.isCollapsed,
     isVisible: state.sidebar.isVisible,
@@ -22,7 +23,6 @@ const Sidebar = ({ location }) => {
   let sidebarMenuClasses = getSidebarMenuClasses(location.pathname);
   const toggleSidebar = (value) => dispatch(setSidebarVisibility(value));
   const closeSidebar = () => toggleSidebar(false);
-  const { manageUsersPlaceholder, dashboardPlaceholder } = constants.sidebar;
   return (
     <ProSidebar
       collapsed={isCollapsed}
@@ -46,7 +46,7 @@ const Sidebar = ({ location }) => {
           className={sidebarMenuClasses.dashboard}
           icon={<i className="fa fa-tachometer-alt" />}>
           <NavLink onClick={closeSidebar} to="/dashboard">
-            {dashboardPlaceholder}
+            {t('sidebar.dashboardPlaceholder')}
           </NavLink>
         </MenuItem>
         {profile.is_admin && (
@@ -54,19 +54,19 @@ const Sidebar = ({ location }) => {
             className={sidebarMenuClasses.manageUsers}
             icon={<i className="fa fa-user-plus" />}>
             <NavLink onClick={closeSidebar} to="/manage-users">
-              {manageUsersPlaceholder}
+              {t('sidebar.manageUsersPlaceholder')}
             </NavLink>
           </MenuItem>
         )}
         <SubMenu
-          title="Submenu Example"
+          title={t('sidebar.subMenuExamplePlaceholder')}
           icon={<i className="fa fa-user-plus" />}>
-          <MenuItem>Route 1</MenuItem>
+          <MenuItem>{t('sidebar.route1Placeholder')}</MenuItem>
           <SubMenu
-            title="Submenu Route 1"
+            title={t('sidebar.nestedSubMenuPlaceholder')}
             icon={<i className="fa fa-user-plus" />}>
-            <MenuItem>Route 2</MenuItem>
-            <MenuItem>Route 3</MenuItem>
+            <MenuItem>{t('sidebar.route2Placeholder')}</MenuItem>
+            <MenuItem>{t('sidebar.route3Placeholder')}</MenuItem>
           </SubMenu>
         </SubMenu>
       </Menu>

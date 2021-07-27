@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { Input, Button, ChangePasswordModal } from '../../components';
 import { updateProfileData } from '../../actions/profile';
 import { changePassword } from '../../apis/profile';
@@ -8,22 +9,13 @@ import { useStateCallback, saveToken, showToast } from '../../utility/common';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../schema/profile';
-import { constants } from '../../constants';
 
 const Profile = () => {
-  const {
-    buttons,
-    emailPlaceholder,
-    firstNamePlaceholder,
-    lastNamePlaceholder,
-    changePasswordPlaceholder,
-    title,
-  } = constants.profile;
-
   const [isUpdateBtnLoading, setUpdateBtnLoading] = useStateCallback(false);
   const [isChangeBtnLoading, setChangeBtnLoading] = useStateCallback(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { profile } = useSelector((state) => ({
     profile: state.profile,
   }));
@@ -90,39 +82,39 @@ const Profile = () => {
         <Col lg={12} xl={10} className="offset-lg-0 offset-xl-1">
           <Card>
             <Card.Body className="pad-1">
-              <Card.Title>{title}</Card.Title>
+              <Card.Title>{t('profile.title')}</Card.Title>
               <Form onSubmit={handleSubmit(onUpdateProfile)}>
                 <Row>
                   <Col md={6}>
                     <Input
                       controlId="formFirstName"
-                      placeholder={firstNamePlaceholder}
+                      placeholder={t('profile.firstNamePlaceholder')}
                       error={errors.firstName && errors.firstName.message}
                       showError={touchedFields && touchedFields.firstName}
                       registeredEvents={register('firstName')}
                       isRequired={true}
-                      label={firstNamePlaceholder}
+                      label={t('profile.firstNamePlaceholder')}
                     />
                   </Col>
                   <Col md={6}>
                     <Input
                       controlId="formLastName"
-                      placeholder={lastNamePlaceholder}
+                      placeholder={t('profile.lastNamePlaceholder')}
                       error={errors.lastName && errors.lastName.message}
                       showError={touchedFields && touchedFields.lastName}
                       registeredEvents={register('lastName')}
                       isRequired={true}
-                      label={lastNamePlaceholder}
+                      label={t('profile.lastNamePlaceholder')}
                     />
                   </Col>
                   <Col md={6}>
                     <Input
                       controlId="formEmail"
                       value={profile.email}
-                      placeholder={emailPlaceholder}
+                      placeholder={t('profile.emailPlaceholder')}
                       name="email"
                       isRequired={true}
-                      label={emailPlaceholder}
+                      label={t('profile.emailPlaceholder')}
                       disabled={true}
                       isControlled={true}
                     />
@@ -135,13 +127,13 @@ const Profile = () => {
                         variant="success"
                         disabled={isUpdateBtnLoading}
                         isLoading={isUpdateBtnLoading}
-                        label={buttons.update}
+                        label={t('profile.buttons.update')}
                         onClick={handleSubmit(onUpdateProfile)}
                       />
                     </Col>
                     <Col sm={6} className="change-password">
                       <a href="javascript:;" onClick={toggleModal}>
-                        {changePasswordPlaceholder}
+                        {t('profile.changePasswordPlaceholder')}
                       </a>
                     </Col>
                   </Row>

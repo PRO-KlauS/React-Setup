@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Input } from '../index';
 import { Form } from 'react-bootstrap';
-import { constants } from '../../constants';
+import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../schema/changePassword';
@@ -12,13 +12,7 @@ const ChangePasswordModal = ({
   onChangePassword,
   isLoading,
 }) => {
-  const {
-    title,
-    confirmPasswordPlaceholder,
-    newPasswordPlaceholder,
-    oldPasswordPlaceholder,
-    footerButtons,
-  } = constants.profile.changePasswordModal;
+  const { t } = useTranslation();
 
   const {
     register,
@@ -37,7 +31,7 @@ const ChangePasswordModal = ({
 
   const modalFooterButtons = [
     {
-      label: footerButtons.cancel,
+      label: t('profile.changePasswordModal.footerButtons.cancel'),
       className: 'cancel-btn',
       isLoading: false,
       isDisabled: false,
@@ -45,7 +39,7 @@ const ChangePasswordModal = ({
       variant: 'secondary',
     },
     {
-      label: footerButtons.change,
+      label: t('profile.changePasswordModal.footerButtons.change'),
       className: 'change-btn',
       isLoading: isLoading,
       isDisabled: isLoading,
@@ -55,7 +49,7 @@ const ChangePasswordModal = ({
   ];
   return (
     <Modal
-      title={title}
+      title={t('profile.changePasswordModal.title')}
       isModalVisible={isModalVisible}
       buttons={modalFooterButtons}
       toggleModal={toggleModal}
@@ -68,7 +62,7 @@ const ChangePasswordModal = ({
           showError={touchedFields && touchedFields.oldPassword}
           registeredEvents={register('oldPassword')}
           isRequired={true}
-          label={oldPasswordPlaceholder}
+          label={t('profile.changePasswordModal.oldPasswordPlaceholder')}
         />
         <Input
           controlId="formNewPassword"
@@ -77,7 +71,7 @@ const ChangePasswordModal = ({
           showError={touchedFields && touchedFields.newPassword}
           registeredEvents={register('newPassword')}
           isRequired={true}
-          label={newPasswordPlaceholder}
+          label={t('profile.changePasswordModal.newPasswordPlaceholder')}
         />
         <Input
           controlId="formConfirmPassword"
@@ -86,7 +80,7 @@ const ChangePasswordModal = ({
           showError={touchedFields && touchedFields.confirmPassword}
           registeredEvents={register('confirmPassword')}
           isRequired={true}
-          label={confirmPasswordPlaceholder}
+          label={t('profile.changePasswordModal.confirmPasswordPlaceholder')}
         />
       </Form>
     </Modal>

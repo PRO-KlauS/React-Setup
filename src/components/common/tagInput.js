@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
-import { messages } from '../../constants';
+import { useTranslation } from 'react-i18next';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 const TagInput = ({
@@ -19,6 +19,7 @@ const TagInput = ({
   inputRef,
   name,
 }) => {
+  const { t } = useTranslation();
   return (
     <Form.Group>
       {label && (
@@ -38,7 +39,7 @@ const TagInput = ({
           options={options}
           placeholder={placeholder}
           onChange={onSelect}
-          promptText={messages.noData}
+          promptText={t('messages.noData')}
           multiple
           selected={selected}
           renderMenuItemChildren={(option) => <p>{option.name}</p>}
