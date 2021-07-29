@@ -8,14 +8,14 @@ i18n
   .use(initReactI18next)
   .use(LanguageDetector)
   .init({
-    fallbackLng: 'en',
+    fallbackLng: 'en-US',
     resources: {
-      en: {
+      'en-US': {
         translation: {
           ...enTranslation,
         },
       },
-      ja: {
+      'ja-JP': {
         translation: {
           ...jpTranslation,
         },
@@ -23,6 +23,13 @@ i18n
     },
     interpolation: {
       escapeValue: false, // react already safes from xss
+      format: (value, format, lng) => {
+        let returnValue = value;
+        if (format === 'number') {
+          returnValue = new Intl.NumberFormat(lng).format(value);
+        }
+        return returnValue;
+      },
     },
   });
 

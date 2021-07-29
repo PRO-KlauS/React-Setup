@@ -125,6 +125,7 @@ const enTranslation = {
     changeLanguagePlaceholder: 'Change Language',
     englishPlaceholder: 'English',
     japanesePlaceholder: 'Japanese',
+    testNumber: 'Num : {{value, number}}',
   },
   sidebar: {
     dashboardPlaceholder: 'Dashboard',

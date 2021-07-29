@@ -21,7 +21,7 @@ const initialState = {
     datapoints: 0,
     newEntities: 0,
   },
-  language: 'en',
+  language: 'en-US',
 };
 
 const appReducer = combineReducers({

@@ -10,7 +10,13 @@ import {
 } from 'react-pro-sidebar';
 import { useTranslation } from 'react-i18next';
 import { setSidebarVisibility } from '../../actions/sidebar';
-import { getSidebarMenuClasses } from '../../utility/common';
+import {
+  getSidebarMenuClasses,
+  // formatDateAndTime,
+  // fromNow,
+  // toNow
+} from '../../utility/common';
+// import dayjs from 'dayjs';
 
 const Sidebar = ({ location }) => {
   const dispatch = useDispatch();
@@ -70,6 +76,10 @@ const Sidebar = ({ location }) => {
           </SubMenu>
         </SubMenu>
       </Menu>
+      {/* Just for testing */}
+      {/* {t("header.testNumber", { value: 345454534.4545 })}
+      {"\n"}{formatDateAndTime(dayjs())}
+      {"\n"}{fromNow(dayjs())} */}
     </ProSidebar>
   );
 };

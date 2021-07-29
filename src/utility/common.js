@@ -1,11 +1,21 @@
+import { useState, useRef, useEffect } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { useState, useRef, useEffect } from 'react';
+import updateLocale from 'dayjs/plugin/updateLocale';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 import toast from 'react-hot-toast';
+import constants from '../constants/constants';
+import i18nInstance from '../internationalization/intlSetup';
 
+let locale = i18nInstance.language?.substring(0, 2);
 dayjs.extend(relativeTime);
-
-const formatDate = (date) => date && dayjs(date).format('DD-MM-YYYY');
+dayjs.extend(localizedFormat);
+dayjs.extend(updateLocale);
+dayjs.locale(locale);
+dayjs.updateLocale(
+  locale,
+  locale === 'en' ? constants.enDayJSLocaleObj : constants.jaDayJSLocaleObj,
+);
 
 const showToast = (message) =>
   message &&
@@ -16,15 +26,18 @@ const showToast = (message) =>
     },
   });
 
-const formatTime = (time) => time && dayjs(time).format('hh:mm A');
+const formatDate = (date) => date && dayjs(date).format('L');
 
-const formatDateAndTime = (date) =>
-  date && dayjs(date).format('DD-MM-YYYY hh:mm A');
+const formatTime = (time) => time && dayjs(time).format('LT');
+
+const formatDateAndTime = (date) => date && dayjs(date).format('L LT');
 
 const formatDateBySpecifiedFormat = (date, format) =>
   date && format && dayjs(date).format(format);
 
 const fromNow = (date) => dayjs(date).fromNow();
+
+const toNow = (date) => dayjs(date).toNow();
 
 const timeTo = (date) => {
   let returnValue = '-';
@@ -191,6 +204,7 @@ export {
   formatDateBySpecifiedFormat,
   formatDateAndTime,
   fromNow,
+  toNow,
   timeTo,
   titleCase,
   capitalize,
