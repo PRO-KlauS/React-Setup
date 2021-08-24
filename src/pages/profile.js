@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { Input, Button, ChangePasswordModal } from '../../components';
-import { updateProfileData } from '../../actions/profile';
-import { changePassword } from '../../apis/profile';
-import { useStateCallback, saveToken, showToast } from '../../utility/common';
+import { Input, Button, ChangePasswordModal } from '../components';
+import { updateProfileData } from '../actions/profile';
+import { changePassword } from '../apis/profile';
+import { useStateCallback, saveToken, showToast } from '../utility/common';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import schema from '../../schema/profile';
+import schema from '../schema/profile';
 
 const Profile = () => {
   const [isUpdateBtnLoading, setUpdateBtnLoading] = useStateCallback(false);

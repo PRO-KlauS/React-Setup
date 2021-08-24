@@ -9,12 +9,12 @@ import {
   Table,
   ToolTip,
   Dropdown,
-} from '../../components';
-import { setDashboardData } from '../../actions/dashboard';
-import { showToast, useStateCallback } from '../../utility/common';
+} from '../components';
+import { setDashboardData } from '../actions/dashboard';
+import { showToast, useStateCallback } from '../utility/common';
 import { Container, Row, Card, Tabs, Tab, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { sortingMethodIconMapper } from '../../utility/mapper';
+import { sortingMethodIconMapper } from '../utility/mapper';
 
 const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
   const dispatch = useDispatch();

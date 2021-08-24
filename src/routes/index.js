@@ -85,7 +85,7 @@ const Routes = () => {
   useEffect(() => {
     loaderCount > 0 && dispatch(setReduxLoaderCount(0));
   }, []);
-  let isAuthenticated = !token;
+  let isAuthenticated = token;
   let isAdmin = profile && profile.is_admin;
   return (
     <Router>

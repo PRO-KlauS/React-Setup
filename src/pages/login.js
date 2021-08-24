@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Form, Container, Alert } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { Input, Button } from '../../components';
-import { showToast, useStateCallback } from '../../utility/common';
+import { Input, Button } from '../components';
+import { showToast, useStateCallback } from '../utility/common';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import schema from '../../schema/login';
-import { setUserToken } from '../../actions/login';
+import schema from '../schema/login';
+import { setUserToken } from '../actions/login';
 
 const Login = () => {
   useEffect(() => {

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
-import { Input, Checkbox, Button } from '../../components';
-import { showToast, useStateCallback } from '../../utility/common';
+import { Input, Checkbox, Button } from '../components';
+import { showToast, useStateCallback } from '../utility/common';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
-import schema from '../../schema/editUser';
-import { editUser } from '../../apis/manageUsers';
+import schema from '../schema/editUser';
+import { editUser } from '../apis/manageUsers';
 
 const EditUser = ({ history }) => {
   const { t } = useTranslation();

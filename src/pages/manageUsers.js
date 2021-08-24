@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Container, Card, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { Table, Input, Button } from '../../components';
-import { getUsers } from '../../actions/manageUsers';
-import { showToast, useStateCallback } from '../../utility/common';
+import { Table, Input, Button } from '../components';
+import { getUsers } from '../actions/manageUsers';
+import { showToast, useStateCallback } from '../utility/common';
 
 const ManageUsers = ({ history }) => {
   const dispatch = useDispatch();
