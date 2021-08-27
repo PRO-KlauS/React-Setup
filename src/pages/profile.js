@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -11,16 +11,20 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../schema/profile';
 
 const Profile = () => {
-  const [isUpdateBtnLoading, setUpdateBtnLoading] = useStateCallback(false);
-  const [isChangeBtnLoading, setChangeBtnLoading] = useStateCallback(false);
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [state, setState] = useStateCallback({
+    isUpdateBtnLoading: false,
+    isChangeBtnLoading: false,
+    isModalVisible: false,
+  });
+  const { isUpdateBtnLoading, isChangeBtnLoading, isModalVisible } = state;
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { profile } = useSelector((state) => ({
     profile: state.profile,
   }));
 
-  const toggleModal = () => setModalVisible(!isModalVisible);
+  const toggleModal = () =>
+    setState({ ...state, isModalVisible: !isModalVisible });
 
   const {
     register,
@@ -36,7 +40,7 @@ const Profile = () => {
     resolver: yupResolver(schema),
   });
   const onUpdateProfile = (data) => {
-    setUpdateBtnLoading(true, () => {
+    setState({ ...state, isUpdateBtnLoading: true }, () => {
       let body = {
         first_name: data.firstName,
         last_name: data.lastName,
@@ -48,9 +52,8 @@ const Profile = () => {
           } else {
             showToast(res.error_message);
           }
-          setUpdateBtnLoading(false);
         })
-        .catch(() => setUpdateBtnLoading(false));
+        .finally(() => setState({ ...state, isUpdateBtnLoading: false }));
     });
   };
 
@@ -59,7 +62,7 @@ const Profile = () => {
       old_password: data.oldPassword,
       new_password: data.newPassword,
     };
-    setChangeBtnLoading(true, () => {
+    setState({ ...state, isChangeBtnLoading: true }, () => {
       changePassword(profile.id, body)
         .then((res) => {
           if (res.data.status) {
@@ -70,9 +73,8 @@ const Profile = () => {
           } else {
             showToast(res.data.error_message);
           }
-          setChangeBtnLoading(false);
         })
-        .catch(() => setChangeBtnLoading(false));
+        .finally(() => setState({ ...state, isChangeBtnLoading: false }));
     });
   };
 

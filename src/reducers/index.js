@@ -4,8 +4,6 @@ import loginReducer from './login';
 import loaderReducer from './loader';
 import profileReducer from './profile';
 import sidebarReducer from './sidebar';
-import usersReducer from './users';
-import dashboardReducer from './dashboard';
 import languageReducer from './internationalization';
 import { removeToken } from '../utility/common';
 
@@ -14,13 +12,6 @@ const initialState = {
   loaderCount: 0,
   profile: {},
   sidebar: { isCollapsed: false, isVisible: false },
-  users: { items: [], totalItemCount: 0, totalPages: 0 },
-  dashboardDetails: {
-    entities: 0,
-    urls: 0,
-    datapoints: 0,
-    newEntities: 0,
-  },
   language: 'en-US',
 };
 
@@ -29,8 +20,6 @@ const appReducer = combineReducers({
   loaderCount: loaderReducer,
   profile: profileReducer,
   sidebar: sidebarReducer,
-  users: usersReducer,
-  dashboardDetails: dashboardReducer,
   language: languageReducer,
 });
 

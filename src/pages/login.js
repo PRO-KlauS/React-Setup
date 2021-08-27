@@ -46,14 +46,6 @@ const Login = () => {
           setLoading(false);
         })
         .catch(() => setLoading(false));
-      // setUserToken(data)
-      //   .then((res) => {
-      //     if (!res.status) {
-      //       setErrorMessage(res.error_message);
-      //     }
-      //     setLoading(false);
-      //   })
-      //   .catch(() => setLoading(false));
     });
   };
 

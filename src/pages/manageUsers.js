@@ -1,57 +1,80 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Container, Card, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Table, Input, Button } from '../components';
-import { getUsers } from '../actions/manageUsers';
 import { showToast, useStateCallback } from '../utility/common';
+import { decrementLoaderCount, incrementLoaderCount } from '../actions/loader';
+import { getUserList } from '../apis/manageUsers';
 
 const ManageUsers = ({ history }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const { users, profile } = useSelector((state) => ({
-    users: state.users,
+  const { profile } = useSelector((state) => ({
     profile: state.profile,
   }));
 
   useEffect(() => {
-    dispatch(getUsers({ search: '', page: 1, is_active: true })).then((res) => {
-      if (!res?.status) {
-        showToast(res?.error_message);
-      }
+    getUsers({ search: '', page: 1, is_active: true }).finally(() => {
+      dispatch(decrementLoaderCount());
     });
   }, []);
-  const [searchValue, setSearchValue] = useState('');
-  const [page, setPage] = useStateCallback(1);
-  const [isButtonLoading, setButtonLoading] = useStateCallback(false);
+
+  const [state, setState] = useStateCallback({
+    searchValue: '',
+    page: 1,
+    isButtonLoading: false,
+    users: {
+      items: [],
+      totalItemCount: 0,
+      totalPages: 0,
+    },
+  });
+  const { searchValue, page, isButtonLoading, users } = state;
+
+  const getUsers = (body) => {
+    dispatch(incrementLoaderCount());
+    return getUserList(body).then((res) => {
+      if (res.data.status) {
+        let users = {
+          items: (res.data.data && res.data.data.users) || [],
+          totalItemCount:
+            (res.data.pagination && res.data.pagination.count) || 0,
+          totalPages: (res.data.pagination && res.data.pagination.pages) || 0,
+        };
+        setState({ ...state, users: users });
+      } else {
+        showToast(res.data.error_message);
+      }
+      return Promise.resolve(res);
+    });
+  };
+
   const onPageChange = (page) => {
-    setPage(page, () =>
-      dispatch(
-        getUsers({ search: searchValue, page: page, is_active: true }),
-      ).then((res) => {
-        if (res.status) {
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-          });
-        }
-      }),
+    setState({ ...state, page: page }, () =>
+      getUsers({ search: searchValue, page: page, is_active: true })
+        .then((res) => {
+          if (res.data.status) {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth',
+            });
+          }
+        })
+        .finally(() => dispatch(decrementLoaderCount())),
     );
   };
   const onSearchValueChange = (e) => {
-    setSearchValue(e.target.value);
+    setState({ ...state, searchValue: e.target.value });
   };
   const onSearchUser = () => {
-    setButtonLoading(true, () => {
-      setPage(1);
-      dispatch(getUsers({ search: searchValue, page: 1, is_active: true }))
-        .then((res) => {
-          if (!res.status) {
-            showToast(res.error_message);
-          }
-          setButtonLoading(false);
-        })
-        .catch(() => setButtonLoading(false));
+    setState({ ...state, isButtonLoading: true, page: 1 }, () => {
+      getUsers({ search: searchValue, page: 1, is_active: true }).finally(
+        () => {
+          setState({ ...state, isButtonLoading: false });
+          dispatch(decrementLoaderCount());
+        },
+      );
     });
   };
   const onEditUser = (user) => {

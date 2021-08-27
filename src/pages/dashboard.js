@@ -10,24 +10,16 @@ import {
   ToolTip,
   Dropdown,
 } from '../components';
-import { setDashboardData } from '../actions/dashboard';
+import { getDashBoardDetails } from '../apis/dashboard';
+import { incrementLoaderCount, decrementLoaderCount } from '../actions/loader';
 import { showToast, useStateCallback } from '../utility/common';
 import { Container, Row, Card, Tabs, Tab, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { sortingMethodIconMapper } from '../utility/mapper';
 
-const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
+const Dashboard = ({ history }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const { dashboardDetails, profile } = useSelector((state) => ({
-    dashboardDetails: state.dashboardDetails,
-    profile: state.profile,
-  }));
-
-  useEffect(() => {
-    dispatch(setDashboardData());
-  }, []);
-  const { items = [], totalItemCount, totalPages } = companies || {};
   const [state, setState] = useStateCallback({
     searchValue: '',
     selectedCompanies: [],
@@ -38,6 +30,17 @@ const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
     isUpdateBtnLoading: false,
     sortMethod: 'both',
     selectedDropdown: { value: 'All', key: 'all' },
+    dashboardDetails: {
+      entities: 0,
+      urls: 0,
+      datapoints: 0,
+      newEntities: 0,
+    },
+    companies: {
+      items: [],
+      totalItemCount: 0,
+      totalPages: 0,
+    },
   });
 
   const {
@@ -50,7 +53,41 @@ const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
     isUpdateBtnLoading,
     sortMethod,
     selectedDropdown,
+    companies,
+    dashboardDetails,
   } = state;
+
+  const { items = [], totalItemCount, totalPages } = companies || {};
+
+  const { profile } = useSelector((state) => ({
+    profile: state.profile,
+  }));
+
+  useEffect(() => {
+    setDashboardData();
+  }, []);
+
+  const setDashboardData = () => {
+    dispatch(incrementLoaderCount());
+    return getDashBoardDetails()
+      .then((res) => {
+        if (res.data.status) {
+          let dashboardDetails = {
+            entities: res.data.data ? res.data.data.entities : 0,
+            urls: res.data.data ? res.data.data.urls : 0,
+            datapoints: res.data.data ? res.data.data.datapoints : 0,
+            newEntities: res.data.data ? res.data.data.new_entities : 0,
+          };
+          setState({ ...state, dashboardDetails: dashboardDetails });
+        } else {
+          showToast(res.data.error_message);
+        }
+        dispatch(decrementLoaderCount());
+        return res.data;
+      })
+      .catch(() => dispatch(decrementLoaderCount()));
+  };
+
   const onPageChange = (page) => {
     setState(
       {
@@ -170,32 +207,12 @@ const Dashboard = ({ companies, history, addCompany, removeCompany }) => {
     // Do API Call
   };
 
-  const onAddCompany = (id) => {
-    addCompany({ company_id: id }, page).then((res) => {
-      setState({
-        ...state,
-        page: res.newPage && res.newPage !== page ? res.newPage : page,
-      });
-      if (res.status) {
-        showToast(res.message);
-      } else {
-        showToast(res.error_message);
-      }
-    });
+  const onAddCompany = () => {
+    // Do API Call and Refresh the Page Data
   };
 
-  const onRemoveCompany = (id) => {
-    removeCompany({ company_id: id }, page).then((res) => {
-      setState({
-        ...state,
-        page: res.newPage && res.newPage !== page ? res.newPage : page,
-      });
-      if (res.status) {
-        showToast(res.message);
-      } else {
-        showToast(res.error_message);
-      }
-    });
+  const onRemoveCompany = () => {
+    // Do API Call and Refresh the Page Data
   };
 
   const onHeaderClick = () => {
