@@ -35,7 +35,6 @@ client.interceptors.response.use(
   function (response) {
     if (response.data && response.data.data && response.data.data.logout) {
       localStorage.removeItem('TOKEN');
-      localStorage.setItem('SHOW_TOAST', true);
     }
     return response;
   },
