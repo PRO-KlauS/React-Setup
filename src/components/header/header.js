@@ -22,7 +22,7 @@ const Header = ({ location }) => {
   );
   useEffect(() => {
     dispatch(setProfileData()).then((res) => {
-      if (!res.status) showToast(res.error_message);
+      if (!res.data.status) showToast(res.data.error_message);
     });
   }, []);
 

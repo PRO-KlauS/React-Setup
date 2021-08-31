@@ -40,8 +40,8 @@ const Login = () => {
     setLoading(true, () => {
       dispatch(setUserToken(data))
         .then((res) => {
-          if (!res.status) {
-            setErrorMessage(res.error_message);
+          if (!res.data.status) {
+            setErrorMessage(res.data.error_message);
           }
           setLoading(false);
         })

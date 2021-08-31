@@ -14,7 +14,7 @@ const setUserToken = (body) => (dispatch) => {
         payload: token,
       });
     }
-    return res.data;
+    return res;
   });
 };
 

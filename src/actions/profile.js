@@ -7,7 +7,7 @@ const setProfileData = () => (dispatch) => {
     if (res.data.status) {
       dispatch(profileDataAction(res.data.data.user));
     }
-    return res.data;
+    return res;
   });
 };
 
@@ -16,7 +16,7 @@ const updateProfileData = (id, body) => (dispatch) => {
     if (res.data.status) {
       dispatch(profileDataAction(res.data.data.user));
     }
-    return res.data;
+    return res;
   });
 };
 

@@ -47,10 +47,10 @@ const Profile = () => {
       };
       dispatch(updateProfileData(profile.id, body))
         .then((res) => {
-          if (res.status) {
-            showToast(res.message);
+          if (res.data.status) {
+            showToast(res.data.message);
           } else {
-            showToast(res.error_message);
+            showToast(res.data.error_message);
           }
         })
         .finally(() => setState({ ...state, isUpdateBtnLoading: false }));
