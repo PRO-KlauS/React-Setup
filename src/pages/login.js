@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Container, Alert } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -12,8 +12,11 @@ import { setUserToken } from '../actions/login';
 const Login = () => {
   const { t } = useTranslation();
 
-  const [isLoading, setLoading] = useStateCallback(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [state, setState] = useStateCallback({
+    isLoading: false,
+    errorMessage: '',
+  });
+  const { isLoading, errorMessage } = state;
   const dispatch = useDispatch();
 
   const {
@@ -31,16 +34,20 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
   const onSubmit = (data) => {
-    setLoading(true, () => {
-      dispatch(setUserToken(data))
-        .then((res) => {
-          if (!res.data.status) {
-            setErrorMessage(res.data.error_message);
-          }
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    });
+    setState(
+      (state) => ({ ...state, isLoading: true }),
+      () => {
+        dispatch(setUserToken(data))
+          .then((res) => {
+            setState((state) => ({
+              ...state,
+              isLoading: false,
+              errorMessage: res.data.error_message || '',
+            }));
+          })
+          .catch(() => setState((state) => ({ ...state, isLoading: false })));
+      },
+    );
   };
 
   return (

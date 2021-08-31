@@ -24,7 +24,7 @@ const Profile = () => {
   }));
 
   const toggleModal = () =>
-    setState({ ...state, isModalVisible: !isModalVisible });
+    setState((state) => ({ ...state, isModalVisible: !state?.isModalVisible }));
 
   const {
     register,
@@ -40,21 +40,26 @@ const Profile = () => {
     resolver: yupResolver(schema),
   });
   const onUpdateProfile = (data) => {
-    setState({ ...state, isUpdateBtnLoading: true }, () => {
-      let body = {
-        first_name: data.firstName,
-        last_name: data.lastName,
-      };
-      dispatch(updateProfileData(profile.id, body))
-        .then((res) => {
-          if (res.data.status) {
-            showToast(res.data.message);
-          } else {
-            showToast(res.data.error_message);
-          }
-        })
-        .finally(() => setState({ ...state, isUpdateBtnLoading: false }));
-    });
+    setState(
+      (state) => ({ ...state, isUpdateBtnLoading: true }),
+      () => {
+        let body = {
+          first_name: data.firstName,
+          last_name: data.lastName,
+        };
+        dispatch(updateProfileData(profile.id, body))
+          .then((res) => {
+            if (res.data.status) {
+              showToast(res.data.message);
+            } else {
+              showToast(res.data.error_message);
+            }
+          })
+          .finally(() =>
+            setState((state) => ({ ...state, isUpdateBtnLoading: false })),
+          );
+      },
+    );
   };
 
   const onChangePassword = (data) => {
@@ -62,20 +67,25 @@ const Profile = () => {
       old_password: data.oldPassword,
       new_password: data.newPassword,
     };
-    setState({ ...state, isChangeBtnLoading: true }, () => {
-      changePassword(profile.id, body)
-        .then((res) => {
-          if (res.data.status) {
-            showToast(res.data.message);
-            let newToken = 'Bearer ' + res.data.token.access_token;
-            saveToken(newToken);
-            toggleModal();
-          } else {
-            showToast(res.data.error_message);
-          }
-        })
-        .finally(() => setState({ ...state, isChangeBtnLoading: false }));
-    });
+    setState(
+      (state) => ({ ...state, isChangeBtnLoading: true }),
+      () => {
+        changePassword(profile.id, body)
+          .then((res) => {
+            if (res.data.status) {
+              showToast(res.data.message);
+              let newToken = 'Bearer ' + res.data.token.access_token;
+              saveToken(newToken);
+              toggleModal();
+            } else {
+              showToast(res.data.error_message);
+            }
+          })
+          .finally(() =>
+            setState((state) => ({ ...state, isChangeBtnLoading: false })),
+          );
+      },
+    );
   };
 
   return (

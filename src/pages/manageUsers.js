@@ -42,7 +42,7 @@ const ManageUsers = ({ history }) => {
             (res.data.pagination && res.data.pagination.count) || 0,
           totalPages: (res.data.pagination && res.data.pagination.pages) || 0,
         };
-        setState({ ...state, users: users });
+        setState((state) => ({ ...state, users: users }));
       } else {
         showToast(res.data.error_message);
       }
@@ -51,31 +51,36 @@ const ManageUsers = ({ history }) => {
   };
 
   const onPageChange = (page) => {
-    setState({ ...state, page: page }, () =>
-      getUsers({ search: searchValue, page: page, is_active: true })
-        .then((res) => {
-          if (res.data.status) {
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth',
-            });
-          }
-        })
-        .finally(() => dispatch(decrementLoaderCount())),
+    setState(
+      (state) => ({ ...state, page: page }),
+      ({ searchValue }) =>
+        getUsers({ search: searchValue, page: page, is_active: true })
+          .then((res) => {
+            if (res.data.status) {
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+              });
+            }
+          })
+          .finally(() => dispatch(decrementLoaderCount())),
     );
   };
   const onSearchValueChange = (e) => {
-    setState({ ...state, searchValue: e.target.value });
+    setState((state) => ({ ...state, searchValue: e.target.value }));
   };
   const onSearchUser = () => {
-    setState({ ...state, isButtonLoading: true, page: 1 }, () => {
-      getUsers({ search: searchValue, page: 1, is_active: true }).finally(
-        () => {
-          setState({ ...state, isButtonLoading: false });
-          dispatch(decrementLoaderCount());
-        },
-      );
-    });
+    setState(
+      (state) => ({ ...state, isButtonLoading: true, page: 1 }),
+      ({ searchValue }) => {
+        getUsers({ search: searchValue, page: 1, is_active: true }).finally(
+          () => {
+            setState((state) => ({ ...state, isButtonLoading: false }));
+            dispatch(decrementLoaderCount());
+          },
+        );
+      },
+    );
   };
   const onEditUser = (user) => {
     history.push(`/edit-user/${user.id}`, user);
