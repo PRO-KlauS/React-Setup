@@ -15,7 +15,7 @@ import {
   // formatDateAndTime,
   // fromNow,
   // toNow
-} from '../../utility/common';
+} from '../../utility';
 // import dayjs from 'dayjs';
 
 const Sidebar = ({ location }) => {

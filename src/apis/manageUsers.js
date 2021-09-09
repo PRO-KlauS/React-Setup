@@ -1,4 +1,4 @@
-import { get, post, patch } from './client';
+import { get, post, patch } from '../setup/client';
 
 const addNewUser = (body) => {
   return post('user/add', body);

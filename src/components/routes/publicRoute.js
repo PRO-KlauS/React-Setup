@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { PublicRouteLayout } from '../components';
+import { PublicRouteLayout } from '../';
 
 const PublicRoute = ({
   component: Component,

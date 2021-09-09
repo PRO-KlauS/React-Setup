@@ -1,6 +1,6 @@
 import axios from 'axios';
-import i18nInstance from '../internationalization/intlSetup';
-import { getToken, getBaseURL, showToast } from '../utility/common';
+import i18nInstance from './i18next';
+import { getToken, getBaseURL, showToast } from '../utility';
 
 const client = axios.create({
   baseURL: getBaseURL(),

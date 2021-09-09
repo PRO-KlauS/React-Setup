@@ -1,6 +1,6 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { UserLayout } from "../components";
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import { UserLayout } from '../';
 
 const UserRoute = ({
   component: Component,
@@ -21,7 +21,7 @@ const UserRoute = ({
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: '/login',
               state: { from: props.location },
             }}
           />

@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { LOGOUT, SET_USER_TOKEN } from '../actions/login';
-import loginReducer from './login';
-import loaderReducer from './loader';
-import profileReducer from './profile';
-import sidebarReducer from './sidebar';
-import languageReducer from './internationalization';
-import { removeToken } from '../utility/common';
+import loginReducer from '../reducers/login';
+import loaderReducer from '../reducers/loader';
+import profileReducer from '../reducers/profile';
+import sidebarReducer from '../reducers/sidebar';
+import languageReducer from '../reducers/internationalization';
+import { removeToken } from '../utility';
 
 const initialState = {
   token: '',

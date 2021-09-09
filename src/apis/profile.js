@@ -1,4 +1,4 @@
-import { get, put, post } from './client';
+import { get, put, post } from '../setup/client';
 
 const getProfile = (body) => {
   return get('user/me', body);

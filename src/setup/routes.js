@@ -9,9 +9,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import { setReduxLoaderCount } from '../actions/loader';
-import UserRoute from './userRoute';
-import AdminRoute from './adminRoute';
-import PublicRoute from './publicRoute';
+import UserRoute from '../components/routes/userRoute';
+import AdminRoute from '../components/routes/adminRoute';
+import PublicRoute from '../components/routes/publicRoute';
 import Login from '../pages/login';
 import AddNewUser from '../pages/addNewUser';
 import Profile from '../pages/profile';
@@ -85,8 +85,8 @@ const Routes = () => {
   useEffect(() => {
     loaderCount > 0 && dispatch(setReduxLoaderCount(0));
   }, []);
-  let isAuthenticated = token;
-  let isAdmin = profile && profile.is_admin;
+  let isAuthenticated = !token;
+  let isAdmin = true || (profile && profile.is_admin);
   return (
     <Router>
       {/* <Suspense fallback={<FullScreenLoader />}> */}

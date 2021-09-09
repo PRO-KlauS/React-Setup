@@ -8,7 +8,7 @@ import {
   setSidebarCollapse,
   setSidebarVisibility,
 } from '../../actions/sidebar';
-import { getHeaderTitle, showToast } from '../../utility/common';
+import { getHeaderTitle, showToast } from '../../utility';
 
 const Header = ({ location }) => {
   const dispatch = useDispatch();

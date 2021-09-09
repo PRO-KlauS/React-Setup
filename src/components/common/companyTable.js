@@ -1,8 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Table, Checkbox, Button, ToolTip } from '../index';
-import { formatDate } from '../../utility/common';
-import { sortingMethodIconMapper } from '../../utility/mapper';
+import { formatDate, sortingMethodIconMapper } from '../../utility';
 
 const CompanyTable = ({
   page,

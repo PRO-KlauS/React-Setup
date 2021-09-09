@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Input, Button, ChangePasswordModal } from '../components';
 import { updateProfileData } from '../actions/profile';
 import { changePassword } from '../apis/profile';
-import { useStateCallback, saveToken, showToast } from '../utility/common';
+import { useStateCallback, saveToken, showToast } from '../utility';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../schema/profile';

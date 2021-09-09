@@ -1,5 +1,5 @@
 import { login } from '../apis/login';
-import { saveToken } from '../utility/common';
+import { saveToken } from '../utility';
 
 const SET_USER_TOKEN = 'SET_USER_TOKEN';
 const LOGOUT = 'LOGOUT';

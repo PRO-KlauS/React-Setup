@@ -3,7 +3,7 @@ import { Container, Card, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Table, Input, Button } from '../components';
-import { showToast, useStateCallback } from '../utility/common';
+import { showToast, useStateCallback } from '../utility';
 import { decrementLoaderCount, incrementLoaderCount } from '../actions/loader';
 import { getUserList } from '../apis/manageUsers';
 

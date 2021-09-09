@@ -12,10 +12,13 @@ import {
 } from '../components';
 import { getDashBoardDetails } from '../apis/dashboard';
 import { incrementLoaderCount, decrementLoaderCount } from '../actions/loader';
-import { showToast, useStateCallback } from '../utility/common';
+import {
+  showToast,
+  useStateCallback,
+  sortingMethodIconMapper,
+} from '../utility';
 import { Container, Row, Card, Tabs, Tab, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { sortingMethodIconMapper } from '../utility/mapper';
 
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch();

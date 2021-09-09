@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
 import { Input, Checkbox, Button } from '../components';
-import { showToast, useStateCallback } from '../utility/common';
+import { showToast, useStateCallback } from '../utility';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
