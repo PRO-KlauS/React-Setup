@@ -1,9 +1,7 @@
 const getToken = async () => {
   try {
     const token = await localStorage.getItem('TOKEN');
-    if (token !== null) {
-      return token;
-    }
+    return token || '';
   } catch (e) {
     return e;
   }

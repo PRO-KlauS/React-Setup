@@ -19,12 +19,13 @@ import {
 } from './methods/others';
 import {
   capitalize,
+  capitalizeSentence,
   getStringWithDays,
   getStringWithHours,
   removeAllSpacesFromString,
-  titleCase,
+  snakeCaseToTitleCase,
 } from './methods/string';
-import { sortingMethodIconMapper, statusToColorMapper } from './mappers/';
+import { sortingMethodIconMapper, statusToColorMapper } from './mappers';
 
 export {
   formatDate,
@@ -34,8 +35,9 @@ export {
   fromNow,
   toNow,
   timeTo,
-  titleCase,
+  snakeCaseToTitleCase,
   capitalize,
+  capitalizeSentence,
   getFileNameFromURL,
   getStringWithDays,
   getStringWithHours,

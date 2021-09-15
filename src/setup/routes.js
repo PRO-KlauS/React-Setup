@@ -85,8 +85,8 @@ const Routes = () => {
   useEffect(() => {
     loaderCount > 0 && dispatch(setReduxLoaderCount(0));
   }, []);
-  let isAuthenticated = !token;
-  let isAdmin = true || (profile && profile.is_admin);
+  const isAuthenticated = !token;
+  const isAdmin = true || (profile && profile.is_admin);
   return (
     <Router>
       {/* <Suspense fallback={<FullScreenLoader />}> */}
@@ -101,8 +101,11 @@ const Routes = () => {
             )}
           />
           {routeMapper.map(
-            ({ component, exact, path, routeComponent: RouteComponent }) => (
+            ({
+ component, exact, path, routeComponent: RouteComponent 
+}) => (
               <RouteComponent
+                key={path}
                 isAuthenticated={isAuthenticated}
                 component={component}
                 path={path}

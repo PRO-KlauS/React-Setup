@@ -1,37 +1,55 @@
-const capitalize = (s) => s && s[0].toUpperCase() + s.slice(1);
+const capitalize = (s) => (s ? s[0].toUpperCase() + s.slice(1) : '');
 
-const titleCase = (s) => {
-  let sentence = s && s.split('_');
-  sentence = sentence && sentence.map((se) => capitalize(se));
+const capitalizeSentence = (s) => {
+  if (s) {
+    let sentence = s.split(' ');
+    sentence = sentence && sentence.map((se) => capitalize(se));
+    return sentence && sentence.join(' ');
+  } else {
+    return '';
+  }
+};
 
-  return sentence && sentence.join(' ');
+const snakeCaseToTitleCase = (s) => {
+  if (s) {
+    let sentence = s.split('_');
+    sentence = sentence && sentence.map((se) => capitalize(se));
+    return sentence && sentence.join(' ');
+  } else {
+    return '';
+  }
 };
 
 const getStringWithDays = (s) => {
-  let modifiedString = s || '-';
+  let modifiedString = Number(s) || '';
   if (modifiedString > 1) {
     modifiedString += ' days';
   } else if (modifiedString == 1) {
     modifiedString += ' day';
+  } else {
+    modifiedString = '-';
   }
   return modifiedString;
 };
 
 const getStringWithHours = (s) => {
-  let modifiedString = s || '-';
+  let modifiedString = Number(s) || '';
   if (modifiedString > 1) {
     modifiedString += ' hours';
   } else if (modifiedString == 1) {
     modifiedString += ' hour';
+  } else {
+    modifiedString = '-';
   }
   return modifiedString;
 };
 
-const removeAllSpacesFromString = (s) => s && s.replace(/ /g, '');
+const removeAllSpacesFromString = (s) => (s ? s.replace(/ /g, '') : '');
 
 export {
   capitalize,
-  titleCase,
+  capitalizeSentence,
+  snakeCaseToTitleCase,
   getStringWithDays,
   getStringWithHours,
   removeAllSpacesFromString,

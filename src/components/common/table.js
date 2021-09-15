@@ -22,20 +22,28 @@ const CustomTable = ({
           <thead>
             <tr>
               {headers.map(
-                ({ icons, label, className, component, onHeaderClick }) => {
-                  return (
-                    <th className={className} onClick={onHeaderClick}>
+                (
+                  {
+ icons, label, className, component, onHeaderClick 
+},
+                  index,
+                ) => (
+                    <th
+                      key={index}
+                      className={className}
+                      onClick={onHeaderClick}
+                    >
                       <span>{component || label}</span>
-                      {icons &&
-                        icons.map((icon) => (
+                      {icons
+                        && icons.map((icon, index) => (
                           <i
+                            key={index}
                             className={icon.className}
                             onClick={icon.onClick}
                           />
                         ))}
                     </th>
-                  );
-                },
+                  ),
               )}
             </tr>
           </thead>
