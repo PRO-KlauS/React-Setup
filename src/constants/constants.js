@@ -1,19 +1,20 @@
 import enLocale from 'dayjs/locale/en';
 import jaLocale from 'dayjs/locale/ja';
+
 const constants = {
   enDayJSLocaleObj: {
     ...(enLocale || {}),
-    format: {
-      ...(enLocale?.format || {}),
+    formats: {
+      ...(enLocale?.formats || {}),
       LTS: 'hh:mm:ss A',
       LT: 'hh:mm A',
       L: 'DD/MM/YYYY',
     },
   },
   jaDayJSLocaleObj: {
-    ...(enLocale || {}),
-    format: {
-      ...(jaLocale?.format || {}),
+    ...(jaLocale || {}),
+    formats: {
+      ...(jaLocale?.formats || {}),
       LT: 'HH:mm',
       LTS: 'HH:mm:ss',
       L: 'YYYY/MM/DD',
