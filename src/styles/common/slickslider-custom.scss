@@ -1,0 +1,118 @@
+@import "./variables.scss";
+.slick-slider {
+  margin-left: -10px;
+  margin-right: -10px;
+  .slick-track,
+  .slick-list {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .slick-slide {
+    padding: 0 10px 15px;
+  }
+  .slick-prev {
+    left: auto;
+  }
+  .slick-next {
+    right: 10px;
+  }
+  .slick-prev,
+  .slick-next {
+    border-radius: 50%;
+    background-color: $white;
+    box-shadow: 0 1px 9px rgba($color: $black, $alpha: 0.09);
+    top: -30px;
+    overflow: hidden;
+    &:hover {
+      background: $blue;
+      &:before {
+        color: $white;
+      }
+    }
+    &:focus {
+      background: $white;
+      &:before {
+        color: $blue;
+      }
+    }
+    &.slick-disabled {
+      opacity: 0.65;
+      &:hover,
+      &:focus {
+        background: $white;
+        &:before {
+          color: $blue;
+        }
+      }
+    }
+    &:before {
+      color: $blue;
+      font-family: inherit;
+      opacity: 1;
+      position: relative;
+      top: -1px;
+    }
+  }
+  .slick-next:before {
+    content: ">";
+  }
+  .slick-prev:before {
+    content: "<";
+  }
+  .slick-dots {
+    position: relative;
+    bottom: 5px;
+    li {
+      width: 15px;
+      height: 15px;
+      button {
+        width: 15px;
+        height: 15px;
+        padding: 0;
+        &:before {
+          width: 15px;
+          height: 15px;
+          line-height: 18px;
+          font-size: 9px;
+        }
+        &:hover,
+        &:focus {
+          &:before {
+            color: $blue;
+          }
+        }
+      }
+      &.slick-active {
+        button {
+          &:before {
+            color: $blue;
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: 300px) {
+    .slick-prev,
+    .slick-next {
+      font-size: 26px;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+    }
+    .slick-prev {
+      right: 50px;
+    }
+  }
+  @media (max-width: 299.98px) {
+    .slick-prev,
+    .slick-next {
+      font-size: 20px;
+      width: 26px;
+      height: 26px;
+      line-height: 28px;
+    }
+    .slick-prev {
+      right: 45px;
+    }
+  }
+}
