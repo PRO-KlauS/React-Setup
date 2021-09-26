@@ -1,10 +1,11 @@
 module.exports = {
   extends: ['airbnb'],
-  plugins: ['react'],
+  plugins: ['react', 'jest'],
   parser: 'babel-eslint',
   env: {
     browser: true,
     node: true,
+    'jest/globals': true,
   },
   rules: {
     'no-use-before-define': 'off',
@@ -21,7 +22,6 @@ module.exports = {
     'import/no-cycle': 'off',
     'no-shadow': 'off',
     'no-console': 'error',
-    'max-len': ['error', { code: 250 }],
     'no-unused-expressions': 'off',
     'no-nested-ternary': 'off',
     'no-underscore-dangle': 'off',
@@ -48,5 +48,6 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'no-else-return': 'off',
     'jsx-a11y/no-noninteractive-element-interactions': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
 };

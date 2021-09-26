@@ -45,8 +45,8 @@ const timeTo = (date) => {
       returnValue = capitalize(dayjs(date).toNow(true));
     } else {
       returnValue = `${hoursDiff} ${
-        hoursDiff > 1 ? 'hours' : 'hour'
-      } ${minutesDiff} ${minutesDiff > 1 ? 'minutes' : 'minute'}`;
+        hoursDiff === 1 ? 'hour' : 'hours'
+      } ${minutesDiff} ${minutesDiff === 1 ? 'minute' : 'minutes'}`;
     }
   }
   return returnValue;

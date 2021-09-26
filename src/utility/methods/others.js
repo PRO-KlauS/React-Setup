@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
-const showToast = (message) =>
-  message &&
-  toast(message, {
+const showToast = (message) => message
+  && toast(message, {
     style: {
       background: '#333',
       color: '#fff',
@@ -11,19 +10,19 @@ const showToast = (message) =>
   });
 
 const getFileNameFromURL = (url) => {
-  let tempName =
-    (url && url.split('/').pop().split('#')[0].split('?')[0]) || '';
+  const tempName = url ? url.split('/').pop().split('#')[0].split('?')[0] : '';
   return tempName.replace(/%20/g, ' ');
 };
 
 const getFileExtensionFromName = (name) => {
   if (name) {
-    let nameArray = name.split('.') || [];
-    let extensionArray =
-      (nameArray[nameArray.length - 1] &&
-        nameArray[nameArray.length - 1].split('?')) ||
-      [];
+    const nameArray = name.split('.') || [];
+    const extensionArray = (nameArray[nameArray.length - 1]
+        && nameArray[nameArray.length - 1].split('?'))
+      || [];
     return extensionArray[0] || '';
+  } else {
+    return '';
   }
 };
 
@@ -48,31 +47,31 @@ const useStateCallback = (initialState) => {
 };
 
 const getHeaderTitle = (path) => {
-  if (path.match(/^\/profile/)) {
+  if (/profile/.test(path)) {
     return 'Manage Profile';
-  } else if (path.match(/^\/dashboard/)) {
+  } else if (/dashboard/.test(path)) {
     return 'Dashboard';
-  } else if (path.match(/^\/add-new-user/)) {
+  } else if (/add-new-user/.test(path)) {
     return 'Add User';
-  } else if (path.match(/^\/edit-user/)) {
+  } else if (/edit-user/.test(path)) {
     return 'Edit User';
-  } else if (path.match(/^\/manage-users/)) {
+  } else if (/manage-users/.test(path)) {
     return 'Manage Users';
   }
   return 'Yet to be set';
 };
 
 const getSidebarMenuClasses = (path) => {
-  let sidebarMenuClasses = {
+  const sidebarMenuClasses = {
     dashboard: '',
     manageUsers: '',
   };
-  if (path.match(/^\/dashboard/)) {
+  if (/dashboard/.test(path)) {
     sidebarMenuClasses.dashboard = 'active';
   } else if (
-    path.match(/^\/add-new-user/) ||
-    path.match(/^\/manage-users/) ||
-    path.match(/^\/edit-user/)
+    /add-new-user/.test(path)
+    || /manage-users/.test(path)
+    || /edit-user/.test(path)
   ) {
     sidebarMenuClasses.manageUsers = 'active';
   }
@@ -86,6 +85,8 @@ const getBaseURL = () => {
     return process.env.REACT_APP_STAGING_URL;
   } else if (process.env.REACT_APP_ENV === 'production') {
     return process.env.REACT_APP_PRODUCTION_URL;
+  } else {
+    return '';
   }
 };
 

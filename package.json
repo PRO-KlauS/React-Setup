@@ -5,17 +5,18 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@hookform/resolvers": "^2.6.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.0",
+    "@testing-library/user-event": "^13.2.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "dayjs": "^1.10.6",
     "eslint-plugin-import": "^2.23.4",
     "i18next": "^20.3.5",
     "i18next-browser-languagedetector": "^6.1.2",
+    "is-ci-cli": "^2.2.0",
     "jwt-decode": "^3.1.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^6.0.1",
     "pretty-checkbox": "^3.0.3",
     "pretty-checkbox-react": "^3.2.0",
     "react": "^17.0.2",
@@ -30,7 +31,7 @@
     "react-pro-sidebar": "^0.6.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.4",
+    "react-scripts": "^4.0.3",
     "react-slick": "^0.28.1",
     "react-tooltip": "^4.2.21",
     "redux": "^4.1.0",
@@ -43,10 +44,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "is-ci test:coverage test:watch",
+    "test:watch": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage --watchAll=false",
+    "test:related": "react-scripts test --findRelatedTests --watchAll=false",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/**/*.js --fix-dry-run",
-    "pretty": "prettier \"src/**/*.js\"",
     "staging": "REACT_APP_ENV=staging npm start",
     "production": "REACT_APP_ENV=production npm start",
     "build:staging": "REACT_APP_ENV=staging npm run build",
@@ -69,17 +71,21 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
+    "@testing-library/react-hooks": "^7.0.2",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-jest": "^24.4.2",
     "file-loader": "^6.2.0",
     "husky": "^7.0.2",
+    "jest-watch-typeahead": "^0.6.4",
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{js,jsx,ts,tsx,test.js,test.ts}": [
       "prettier --write",
-      "eslint --fix"
+      "eslint --fix",
+      "npm run test:related"
     ]
   }
 }
