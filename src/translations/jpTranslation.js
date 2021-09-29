@@ -129,8 +129,16 @@ const jpTranslation = {
     ofPlaceholder: 'Japanese of',
   },
   header: {
+    dashboardPlaceholder: "Japanese Dashboard",
+    addUserPlaceholder: "Japanese Add User",
+    editUserPlaceholder: "Japanese Edit User",
+    manageUsersPlaceholder: "Japanese Manage Users",
     profilePlaceholder: 'Japanese Manage Profile',
     logOutPlaceholder: 'Japanese Log Out',
+    changeLanguagePlaceholder: 'Japanese Change Language',
+    englishPlaceholder: 'English',
+    japanesePlaceholder: 'Japanese',
+    testNumber: 'Japanese Num : {{value, number}}',
   },
   sidebar: {
     dashboardPlaceholder: 'Japanese Dashboard',
@@ -150,5 +158,12 @@ const jpTranslation = {
     noData: 'Japanese No data available.',
     sessionExpired: 'Japanese Your session has expired. Please log in again.',
   },
+  validationMessages: {
+    fieldRequired: "Japanese This field is required.",
+    validEmail: "Japanese Enter valid email address.",
+    password6To12Chars: 'Password must be of 6-12 characters.',
+    onlyAlphabets: "Japanese Numbers and special characters are not allowed.",
+    bothPasswordSame: "Japanese Both password must match."
+  }
 };
 export default jpTranslation;

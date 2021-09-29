@@ -1,13 +1,11 @@
 import * as Yup from 'yup';
 
-const login = Yup.object({
+export default (t) => Yup.object({
   email: Yup.string()
-    .required('This field is required.')
-    .email('Enter valid email address.'),
+    .required(t("validationMessages.fieldRequired"))
+    .email(t("validationMessages.validEmail")),
   password: Yup.string()
-    .required('This field is required.')
-    .min(6, 'Password must be 6 characters long.')
-    .max(12, "Password can't be longer than 12 characters."),
-});
-
-export default login;
+    .required(t("validationMessages.fieldRequired"))
+    .min(6, t("validationMessages.validEmail"))
+    .max(12, t("validationMessages.validEmail")),
+});;

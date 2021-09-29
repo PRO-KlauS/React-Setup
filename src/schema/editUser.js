@@ -1,18 +1,16 @@
 import * as Yup from 'yup';
 
-const editUser = Yup.object({
+export default (t) => Yup.object({
   firstName: Yup.string()
-    .required('This field is required.')
+    .required(t("validationMessages.fieldRequired"))
     .matches(
       /^([a-zA-Z\s])*$/,
-      'Numbers and special characters are not allowed.',
+      t("validationMessages.fieldRequired"),
     ),
   lastName: Yup.string()
-    .required('This field is required.')
+    .required(t("validationMessages.onlyAlphabets"))
     .matches(
       /^([a-zA-Z\s])*$/,
-      'Numbers and special characters are not allowed.',
+      t("validationMessages.onlyAlphabets"),
     ),
 });
-
-export default editUser;

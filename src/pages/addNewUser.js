@@ -28,7 +28,7 @@ const AddNewUser = () => {
       confirmPassword: '',
       isAdmin: false,
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema(t)),
   });
   const onSubmit = (data) => {
     setLoading(true, () => {

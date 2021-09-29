@@ -37,7 +37,7 @@ const Profile = () => {
       firstName: profile?.first_name,
       lastName: profile?.last_name,
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema(t)),
   });
   const onUpdateProfile = (data) => {
     setState(

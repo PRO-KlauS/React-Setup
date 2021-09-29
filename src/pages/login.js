@@ -31,7 +31,7 @@ const Login = () => {
       password: '',
       // rememberMe: false,
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema(t)),
   });
   const onSubmit = (data) => {
     setState(
@@ -67,6 +67,7 @@ const Login = () => {
               showError={touchedFields && touchedFields.email}
               registeredEvents={register('email')}
               iconClass="fas fa-envelope"
+              testID="email-input-login-screen"
             />
             <Input
               controlId="formPassword"
@@ -76,6 +77,7 @@ const Login = () => {
               showError={touchedFields && touchedFields.password}
               registeredEvents={register('password')}
               iconClass="fas fa-lock"
+              testID="password-input-login-screen"
             />
             <div className="text-center">
               <Button
@@ -84,6 +86,7 @@ const Login = () => {
                 label={t('loginPage.buttons.login')}
                 onClick={handleSubmit(onSubmit)}
                 type="submit"
+                testID="login-button-login-screen"
               />
             </div>
           </Form>

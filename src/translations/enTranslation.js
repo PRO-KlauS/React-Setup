@@ -120,6 +120,10 @@ const enTranslation = {
     ofPlaceholder: 'of',
   },
   header: {
+    dashboardPlaceholder: "Dashboard",
+    addUserPlaceholder: "Add User",
+    editUserPlaceholder: "Edit User",
+    manageUsersPlaceholder: "Manage Users",
     profilePlaceholder: 'Manage Profile',
     logOutPlaceholder: 'Log Out',
     changeLanguagePlaceholder: 'Change Language',
@@ -145,5 +149,12 @@ const enTranslation = {
     noData: 'No data available.',
     sessionExpired: 'Your session has expired. Please log in again.',
   },
+  validationMessages: {
+    fieldRequired: "This field is required.",
+    validEmail: "Enter valid email address.",
+    password6To12Chars: 'Password must be of 6-12 characters.',
+    onlyAlphabets: "Numbers and special characters are not allowed.",
+    bothPasswordSame: "Both password must match."
+  }
 };
 export default enTranslation;

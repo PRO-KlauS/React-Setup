@@ -1,17 +1,15 @@
 import * as Yup from 'yup';
 
-const changePassword = Yup.object({
+export default (t) => Yup.object({
   oldPassword: Yup.string()
-    .required('This field is required.')
-    .min(6, 'Password must be of 6-12 characters.')
-    .max(12, 'Password must be of 6-12 characters.'),
+    .required(t("validationMessages.fieldRequired"))
+    .min(6, t("validationMessages.password6To12Chars"))
+    .max(12, t("validationMessages.password6To12Chars")),
   newPassword: Yup.string()
-    .required('This field is required.')
-    .min(6, 'Password must be of 6-12 characters.')
-    .max(12, 'Password must be of 6-12 characters.'),
+    .required(t("validationMessages.fieldRequired"))
+    .min(6, t("validationMessages.password6To12Chars"))
+    .max(12, t("validationMessages.password6To12Chars")),
   confirmPassword: Yup.string()
-    .required('This field is required.')
-    .oneOf([Yup.ref('newPassword')], 'Both password must match.'),
+    .required(t("validationMessages.fieldRequired"))
+    .oneOf([Yup.ref('newPassword')], t("validationMessages.bothPasswordSame")),
 });
-
-export default changePassword;

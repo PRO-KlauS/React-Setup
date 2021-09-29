@@ -1,28 +1,26 @@
 import * as Yup from 'yup';
 
-const addNewUser = Yup.object({
+export default (t) => Yup.object({
   firstName: Yup.string()
-    .required('This field is required.')
+    .required(t("validationMessages.fieldRequired"))
     .matches(
       /^([a-zA-Z\s])*$/,
-      'Numbers and special characters are not allowed.',
+      t("validationMessages.onlyAlphabets"),
     ),
   lastName: Yup.string()
-    .required('This field is required.')
+    .required(t("validationMessages.fieldRequired"))
     .matches(
       /^([a-zA-Z\s])*$/,
-      'Numbers and special characters are not allowed.',
+      t("validationMessages.onlyAlphabets"),
     ),
   email: Yup.string()
-    .required('This field is required.')
-    .email('Enter valid email address.'),
+    .required(t("validationMessages.fieldRequired"))
+    .email(t("validationMessages.validEmail")),
   password: Yup.string()
-    .required('This field is required.')
-    .min(6, 'Password must be of 6-12 characters.')
-    .max(12, 'Password must be of 6-12 characters.'),
+    .required(t("validationMessages.fieldRequired"))
+    .min(6, t("validationMessages.password6To12Chars"))
+    .max(12, t("validationMessages.password6To12Chars")),
   confirmPassword: Yup.string()
-    .required('This field is required.')
-    .oneOf([Yup.ref('password')], 'Both password must match.'),
+    .required(t("validationMessages.fieldRequired"))
+    .oneOf([Yup.ref('password')], t("validationMessages.bothPasswordSame")),
 });
-
-export default addNewUser;

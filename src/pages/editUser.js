@@ -27,7 +27,7 @@ const EditUser = ({ history }) => {
       lastName: last_name,
       isAdmin: is_admin,
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema(t)),
   });
   const onSubmit = (data) => {
     setLoading(true, () => {

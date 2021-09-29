@@ -26,7 +26,7 @@ const ChangePasswordModal = ({
       newPassword: '',
       confirmPassword: '',
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema(t)),
   });
 
   const modalFooterButtons = [
